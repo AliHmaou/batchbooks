@@ -167,9 +167,15 @@
         .footer a {
             color: #00aaff;
             text-decoration: none;
+            margin: 0 5px;
         }
         .footer a:hover {
             text-decoration: underline;
+        }
+        .github-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
         }
         #activate-selection-mode {
             cursor: pointer;
@@ -272,6 +278,14 @@
             </a>
         </div>
         
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="published/notebooks/duckit_analysis_20250805_005702.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/published/notebooks/duckit_analysis_20250805_005702.ipynb" target="_blank" title="Analyse des Propriétés de l'État : Une Carte Choropleth pour Comprendre la Répartition Départementale">
+                <img src="notebooks/duckit_analysis_20250805_005702.png" alt="Analyse des Propriétés de l'État : Une Carte Choropleth pour Comprendre la Répartition Départementale" loading="lazy">
+                <div class="title-overlay">Analyse des Propriétés de l'État : Une Carte Choropleth pour Comprendre la Répartition Départementale</div>
+            </a>
+        </div>
+        
         </div>
         <div class="selection-panel">
             <h2>Selected Notebooks</h2>
@@ -280,8 +294,11 @@
         </div>
         <div class="footer">
             <p>
-                *Made with ❤️ and with <a href="https://duckit.fr" target="_blank">duckit.fr</a> - <a href="https://www.linkedin.com/in/ali-hmaou-6b7b73146/" target="_blank">Ali Hmaou</a>*
-                <span id="activate-selection-mode">- select mode</span>
+                Made with ❤️ by <a href="https://www.linkedin.com/in/ali-hmaou-6b7b73146/" target="_blank">Ali Hmaou</a>
+                <span id="activate-selection-mode" style="cursor: pointer; color: #00aaff; margin-left: 15px;">- Select Mode</span>
+            </p>
+            <p class="github-link">
+                <a href="https://github.com/AliHmaou/batchbooks" target="_blank">View on GitHub</a>
             </p>
         </div>
     </div>
