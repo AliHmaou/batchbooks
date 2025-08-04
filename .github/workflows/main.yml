@@ -1,0 +1,54 @@
+name: Deploy Notebook Gallery to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # On a besoin de l'historique complet pour que `git` puisse trouver la branche `gh-pages`
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # Dépendances supplémentaires pour l'export de graphiques
+          pip install kaleido
+
+      - name: Process notebooks and generate images
+        run: python process_notebook.py
+
+      - name: Generate HTML gallery
+        run: python generate_carousel.py
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./published
+          # On force la publication pour écraser l'historique de la branche gh-pages
+          force_orphan: true

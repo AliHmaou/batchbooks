@@ -228,9 +228,15 @@ def generate_html_gallery():
         .footer a {{
             color: #00aaff;
             text-decoration: none;
+            margin: 0 5px;
         }}
         .footer a:hover {{
             text-decoration: underline;
+        }}
+        .github-link {{
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
         }}
         #activate-selection-mode {{
             cursor: pointer;
@@ -253,8 +259,11 @@ def generate_html_gallery():
         </div>
         <div class="footer">
             <p>
-                *Made with ❤️ and with <a href="https://duckit.fr" target="_blank">duckit.fr</a> - <a href="https://www.linkedin.com/in/ali-hmaou-6b7b73146/" target="_blank">Ali Hmaou</a>*
-                <span id="activate-selection-mode">- select mode</span>
+                Made with ❤️ by <a href="https://www.linkedin.com/in/ali-hmaou-6b7b73146/" target="_blank">Ali Hmaou</a>
+                <span id="activate-selection-mode" style="cursor: pointer; color: #00aaff; margin-left: 15px;">- Select Mode</span>
+            </p>
+            <p class="github-link">
+                <a href="https://github.com/{GITHUB_REPO}" target="_blank">View on GitHub</a>
             </p>
         </div>
     </div>
