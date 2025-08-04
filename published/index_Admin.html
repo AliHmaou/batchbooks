@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook Reports</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #2c2c2c;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        }
+        .gallery-item a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 40px 20px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .gallery-item:hover .title-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gallery-item .checkbox {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            z-index: 10;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 2px solid #333;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .gallery-item .checkbox:hover {
+            background-color: #fff;
+        }
+        .gallery-item .checkbox:checked {
+            background-color: #007bff;
+            border-color: #0056b3;
+        }
+        .gallery-item .checkbox:checked::after {
+            content: '✔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .selection-panel {
+            background-color: #2c2c2c;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .selection-panel h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #e0e0e0;
+        }
+        #selected-files {
+            width: 100%;
+            height: 150px;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+            font-size: 0.9rem;
+        }
+        #copy-button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        #copy-button:hover {
+            background-color: #0056b3;
+        }
+        #copy-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notebook Reports Gallery</h1>
+        <div class="gallery">
+            
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250801_173200.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250801_173200.ipynb" target="_blank" title="Cartographie de la Température Moyenne : Une Analyse Météorologique">
+                <img src="notebooks/duckit_analysis_20250801_173200.png" alt="Cartographie de la Température Moyenne : Une Analyse Météorologique" loading="lazy">
+                <div class="title-overlay">Cartographie de la Température Moyenne : Une Analyse Météorologique</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250801_173204.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250801_173204.ipynb" target="_blank" title="Cartographie de la Température Moyenne des Postes Météo en France">
+                <img src="notebooks/duckit_analysis_20250801_173204.png" alt="Cartographie de la Température Moyenne des Postes Météo en France" loading="lazy">
+                <div class="title-overlay">Cartographie de la Température Moyenne des Postes Météo en France</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250801_175536.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250801_175536.ipynb" target="_blank" title="Analyse des Équipements Sportifs dans le Val-d'Oise">
+                <img src="notebooks/duckit_analysis_20250801_175536.png" alt="Analyse des Équipements Sportifs dans le Val-d'Oise" loading="lazy">
+                <div class="title-overlay">Analyse des Équipements Sportifs dans le Val-d'Oise</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250801_230013.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250801_230013.ipynb" target="_blank" title="Cartographie des Musées de France : Une Exploration Géographique">
+                <img src="notebooks/duckit_analysis_20250801_230013.png" alt="Cartographie des Musées de France : Une Exploration Géographique" loading="lazy">
+                <div class="title-overlay">Cartographie des Musées de France : Une Exploration Géographique</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250801_230021.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250801_230021.ipynb" target="_blank" title="Cartographie des Musées de France : Une Analyse Géographique">
+                <img src="notebooks/duckit_analysis_20250801_230021.png" alt="Cartographie des Musées de France : Une Analyse Géographique" loading="lazy">
+                <div class="title-overlay">Cartographie des Musées de France : Une Analyse Géographique</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_105919.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_105919.ipynb" target="_blank" title="Analyse Géo-Spatiale : À la recherche du terrain de football parfait dans le Val-d'Oise">
+                <img src="notebooks/duckit_analysis_20250802_105919.png" alt="Analyse Géo-Spatiale : À la recherche du terrain de football parfait dans le Val-d'Oise" loading="lazy">
+                <div class="title-overlay">Analyse Géo-Spatiale : À la recherche du terrain de football parfait dans le Val-d'Oise</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_110116.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_110116.ipynb" target="_blank" title="Cartographie du Football dans le Val-d'Oise : Analyse et Visualisation des Terrains de Jeu">
+                <img src="notebooks/duckit_analysis_20250802_110116.png" alt="Cartographie du Football dans le Val-d'Oise : Analyse et Visualisation des Terrains de Jeu" loading="lazy">
+                <div class="title-overlay">Cartographie du Football dans le Val-d'Oise : Analyse et Visualisation des Terrains de Jeu</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_150419.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_150419.ipynb" target="_blank" title="Analyse des températures maximales journalières : une plongée dans les données météorologiques françaises">
+                <img src="notebooks/duckit_analysis_20250802_150419.png" alt="Analyse des températures maximales journalières : une plongée dans les données météorologiques françaises" loading="lazy">
+                <div class="title-overlay">Analyse des températures maximales journalières : une plongée dans les données météorologiques françaises</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_150423.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_150423.ipynb" target="_blank" title="Analyse des Températures Maximales Journalières et Anomalies Climatiques">
+                <img src="notebooks/duckit_analysis_20250802_150423.png" alt="Analyse des Températures Maximales Journalières et Anomalies Climatiques" loading="lazy">
+                <div class="title-overlay">Analyse des Températures Maximales Journalières et Anomalies Climatiques</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_151214.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_151214.ipynb" target="_blank" title="Analyse des Températures Journalières et Anomalies Thermiques en France">
+                <img src="notebooks/duckit_analysis_20250802_151214.png" alt="Analyse des Températures Journalières et Anomalies Thermiques en France" loading="lazy">
+                <div class="title-overlay">Analyse des Températures Journalières et Anomalies Thermiques en France</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250802_151221.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250802_151221.ipynb" target="_blank" title="Analyse des températures maximales journalières et anomalies thermiques">
+                <img src="notebooks/duckit_analysis_20250802_151221.png" alt="Analyse des températures maximales journalières et anomalies thermiques" loading="lazy">
+                <div class="title-overlay">Analyse des températures maximales journalières et anomalies thermiques</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_000528.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_000528.ipynb" target="_blank" title="Analyse Comparative des Artistes de Rap : Complexité, Message et Vulgarité">
+                <img src="notebooks/duckit_analysis_20250803_000528.png" alt="Analyse Comparative des Artistes de Rap : Complexité, Message et Vulgarité" loading="lazy">
+                <div class="title-overlay">Analyse Comparative des Artistes de Rap : Complexité, Message et Vulgarité</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_000535.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_000535.ipynb" target="_blank" title="Analyse Multidimensionnelle des Chansons de Rap : Complexité, Politique et Vulgarité">
+                <img src="notebooks/duckit_analysis_20250803_000535.png" alt="Analyse Multidimensionnelle des Chansons de Rap : Complexité, Politique et Vulgarité" loading="lazy">
+                <div class="title-overlay">Analyse Multidimensionnelle des Chansons de Rap : Complexité, Politique et Vulgarité</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_001332.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_001332.ipynb" target="_blank" title="Analyse 3D des Chansons de Rap : Exploration de la Complexité Lexicale, du Message Politique et de la Vulgarité">
+                <img src="notebooks/duckit_analysis_20250803_001332.png" alt="Analyse 3D des Chansons de Rap : Exploration de la Complexité Lexicale, du Message Politique et de la Vulgarité" loading="lazy">
+                <div class="title-overlay">Analyse 3D des Chansons de Rap : Exploration de la Complexité Lexicale, du Message Politique et de la Vulgarité</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_001335.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_001335.ipynb" target="_blank" title="Analyse 3D des Chansons de Rap : Une Exploration Temporelle et Artistique">
+                <img src="notebooks/duckit_analysis_20250803_001335.png" alt="Analyse 3D des Chansons de Rap : Une Exploration Temporelle et Artistique" loading="lazy">
+                <div class="title-overlay">Analyse 3D des Chansons de Rap : Une Exploration Temporelle et Artistique</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_002655.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_002655.ipynb" target="_blank" title="Analyse de la Vulgarité Musicale : Évolution et Dispersion">
+                <img src="notebooks/duckit_analysis_20250803_002655.png" alt="Analyse de la Vulgarité Musicale : Évolution et Dispersion" loading="lazy">
+                <div class="title-overlay">Analyse de la Vulgarité Musicale : Évolution et Dispersion</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_002657.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_002657.ipynb" target="_blank" title="Analyse de la Vulgarité Musicale : Évolution et Dispersion des Chansons">
+                <img src="notebooks/duckit_analysis_20250803_002657.png" alt="Analyse de la Vulgarité Musicale : Évolution et Dispersion des Chansons" loading="lazy">
+                <div class="title-overlay">Analyse de la Vulgarité Musicale : Évolution et Dispersion des Chansons</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_003014.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_003014.ipynb" target="_blank" title="Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical">
+                <img src="notebooks/duckit_analysis_20250803_003014.png" alt="Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical" loading="lazy">
+                <div class="title-overlay">Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_003017.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_003017.ipynb" target="_blank" title="Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical">
+                <img src="notebooks/duckit_analysis_20250803_003017.png" alt="Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical" loading="lazy">
+                <div class="title-overlay">Analyse de l'Évolution de la Vulgarité dans les Chansons par Genre Musical</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_233049.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_233049.ipynb" target="_blank" title="Dynamiques de mobilisations franciliennes 📈 – Explorer les validations de titres de transport au 2ᵉ trimestre 2024">
+                <img src="notebooks/duckit_analysis_20250803_233049.png" alt="Dynamiques de mobilisations franciliennes 📈 – Explorer les validations de titres de transport au 2ᵉ trimestre 2024" loading="lazy">
+                <div class="title-overlay">Dynamiques de mobilisations franciliennes 📈 – Explorer les validations de titres de transport au 2ᵉ trimestre 2024</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_233055.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_233055.ipynb" target="_blank" title="📊 Validations Transilien : décrypter la routine francilienne au 2ᵉ trimestre 2024">
+                <img src="notebooks/duckit_analysis_20250803_233055.png" alt="📊 Validations Transilien : décrypter la routine francilienne au 2ᵉ trimestre 2024" loading="lazy">
+                <div class="title-overlay">📊 Validations Transilien : décrypter la routine francilienne au 2ᵉ trimestre 2024</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_235549.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_235549.ipynb" target="_blank" title="🔥 Carte des éclairs rouges : les 10 000 positions où l'on conduit plus de 50 km/h au-dessus des limites">
+                <img src="notebooks/duckit_analysis_20250803_235549.png" alt="🔥 Carte des éclairs rouges : les 10 000 positions où l'on conduit plus de 50 km/h au-dessus des limites" loading="lazy">
+                <div class="title-overlay">🔥 Carte des éclairs rouges : les 10 000 positions où l'on conduit plus de 50 km/h au-dessus des limites</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250803_235554.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250803_235554.ipynb" target="_blank" title="🔥 Au-delà de la tolérance : cartographier les excès de vitesse extrêmes en France">
+                <img src="notebooks/duckit_analysis_20250803_235554.png" alt="🔥 Au-delà de la tolérance : cartographier les excès de vitesse extrêmes en France" loading="lazy">
+                <div class="title-overlay">🔥 Au-delà de la tolérance : cartographier les excès de vitesse extrêmes en France</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250804_082349.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250804_082349.ipynb" target="_blank" title="Analyse de la Consommation API : Suivi et Évolution des Indicateurs Clés">
+                <img src="notebooks/duckit_analysis_20250804_082349.png" alt="Analyse de la Consommation API : Suivi et Évolution des Indicateurs Clés" loading="lazy">
+                <div class="title-overlay">Analyse de la Consommation API : Suivi et Évolution des Indicateurs Clés</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250804_082353.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250804_082353.ipynb" target="_blank" title="Suivi de la Consommation API : Analyse et Visualisation des Logs">
+                <img src="notebooks/duckit_analysis_20250804_082353.png" alt="Suivi de la Consommation API : Analyse et Visualisation des Logs" loading="lazy">
+                <div class="title-overlay">Suivi de la Consommation API : Analyse et Visualisation des Logs</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250804_082359.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250804_082359.ipynb" target="_blank" title="Suivi de la Consommation API : Analyse de Logs pour une Meilleure Compréhension">
+                <img src="notebooks/duckit_analysis_20250804_082359.png" alt="Suivi de la Consommation API : Analyse de Logs pour une Meilleure Compréhension" loading="lazy">
+                <div class="title-overlay">Suivi de la Consommation API : Analyse de Logs pour une Meilleure Compréhension</div>
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <input type="checkbox" class="checkbox" data-notebook-path="notebooks/duckit_analysis_20250804_091806.ipynb">
+            <a href="https://colab.research.google.com/github/AliHmaou/batchbooks/blob/main/notebooks/duckit_analysis_20250804_091806.ipynb" target="_blank" title="Analyse des Tendances de Visites sur Différentes Plateformes">
+                <img src="notebooks/duckit_analysis_20250804_091806.png" alt="Analyse des Tendances de Visites sur Différentes Plateformes" loading="lazy">
+                <div class="title-overlay">Analyse des Tendances de Visites sur Différentes Plateformes</div>
+            </a>
+        </div>
+        
+        </div>
+        <div class="selection-panel">
+            <h2>Selected Notebooks</h2>
+            <textarea id="selected-files" readonly placeholder="Select notebooks using the checkbox to see their paths here..."></textarea>
+            <button id="copy-button" disabled>Copy List</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            const selectedFilesTextarea = document.getElementById('selected-files');
+            const copyButton = document.getElementById('copy-button');
+
+            function updateSelectedFiles() {
+                const selectedNotebooks = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.dataset.notebookPath);
+                
+                selectedFilesTextarea.value = selectedNotebooks.join('\n');
+                copyButton.disabled = selectedNotebooks.length === 0;
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedFiles);
+            });
+
+            copyButton.addEventListener('click', () => {
+                selectedFilesTextarea.select();
+                document.execCommand('copy');
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy List';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
+    

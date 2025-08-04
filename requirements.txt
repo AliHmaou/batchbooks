@@ -1,0 +1,11 @@
+jupyter
+notebook
+pandas
+duckdb
+plotly
+kaleido
+matplotlib
+folium
+selenium
+webdriver-manager
+geopandas
