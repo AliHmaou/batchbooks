@@ -7,7 +7,7 @@ from pathlib import Path
 
 # --- Configuration ---
 FINAL_OBJECT_VARIABLE_NAME = "dataviz"  # Nouvelle convention
-NOTEBOOK_FOLDER = Path("./unittests")
+NOTEBOOK_FOLDER = Path("./notebooks")
 
 def capture_folium_map(html_path, output_png_path):
     """Prend une capture d'écran d'un fichier HTML local avec Selenium."""
