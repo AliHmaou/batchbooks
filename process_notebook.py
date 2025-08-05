@@ -55,11 +55,9 @@ def capture_folium_map(html_path, output_png_path):
     finally:
         if driver:
             driver.quit()
-        # Nettoyage du fichier HTML temporaire
-        Path(html_path).unlink(missing_ok=True)
 
 
-def create_export_cell(output_image_name, temp_html_name):
+def create_export_cell(output_image_name, output_html_name):
     """Crée le code source pour la cellule d'exportation de manière robuste."""
     # On injecte les variables au début du code de la cellule.
     # On utilise repr() pour s'assurer que les chaînes sont correctement échappées.
@@ -67,7 +65,7 @@ def create_export_cell(output_image_name, temp_html_name):
 # --- Variables injectées par le script ---
 FINAL_OBJECT_VARIABLE_NAME = {repr(FINAL_OBJECT_VARIABLE_NAME)}
 OUTPUT_IMAGE_NAME = {repr(output_image_name)}
-TEMP_HTML_NAME = {repr(temp_html_name)}
+OUTPUT_HTML_NAME = {repr(output_html_name)}
 """
 
     # La logique d'exportation est une chaîne de caractères brute.
@@ -103,8 +101,8 @@ try:
         print(f"--> Détecté : Matplotlib. Sauvegarde dans : {OUTPUT_IMAGE_NAME}")
         final_object.savefig(OUTPUT_IMAGE_NAME, dpi=300, bbox_inches='tight')
     elif 'folium.folium.Map' in object_type:
-        print(f"--> Détecté : Folium. Sauvegarde HTML dans : {TEMP_HTML_NAME}")
-        final_object.save(TEMP_HTML_NAME)
+        print(f"--> Détecté : Folium. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
+        final_object.save(OUTPUT_HTML_NAME)
     else:
         print(f"AVERTISSEMENT: Type non supporté : {object_type}", file=sys.stderr)
 except NameError:
@@ -123,6 +121,7 @@ def process_notebook(notebook_path_str):
     """Modifie, exécute et nettoie un notebook."""
     notebook_path = Path(notebook_path_str)
     output_png_path = notebook_path.with_suffix('.png')
+    output_html_path = notebook_path.with_suffix('.html')
 
     # --- VÉRIFICATION D'EXISTENCE ---
     if output_png_path.exists():
@@ -135,13 +134,12 @@ def process_notebook(notebook_path_str):
     base_name = notebook_path.stem
     # Le notebook et le HTML temporaires sont créés à la racine pour l'exécution
     temp_notebook_path = Path(f"temp_{base_name}.ipynb")
-    temp_html_path = Path(f"_temp_{base_name}.html")
 
     with open(notebook_path, 'r', encoding='utf-8') as f:
         nb_content = json.load(f)
 
     # On passe les chemins complets à la cellule d'exportation
-    nb_content['cells'].append(create_export_cell(str(output_png_path), str(temp_html_path)))
+    nb_content['cells'].append(create_export_cell(str(output_png_path), str(output_html_path)))
 
     with open(temp_notebook_path, 'w', encoding='utf-8') as f:
         json.dump(nb_content, f)
@@ -155,10 +153,10 @@ def process_notebook(notebook_path_str):
         print("Exécution terminée.")
 
         # POST-TRAITEMENT pour Folium
-        if temp_html_path.exists():
-            capture_folium_map(str(temp_html_path), str(output_png_path))
+        if output_html_path.exists():
+            capture_folium_map(str(output_html_path), str(output_png_path))
         else:
-            print("Aucun fichier HTML temporaire trouvé, pas de post-traitement Folium nécessaire.")
+            print("Aucun fichier HTML trouvé, pas de post-traitement Folium nécessaire.")
 
     except subprocess.CalledProcessError as e:
         print(f"ERREUR lors de l'exécution de {notebook_path}.", file=sys.stderr)

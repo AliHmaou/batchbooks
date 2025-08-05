@@ -9,3 +9,4 @@ folium
 selenium
 webdriver-manager
 geopandas
+gradio
