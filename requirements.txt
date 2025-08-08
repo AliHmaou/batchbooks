@@ -6,7 +6,6 @@ plotly
 kaleido
 matplotlib
 folium
-selenium
-webdriver-manager
 geopandas
 gradio
+playwright
