@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Design 3 - Défilement Horizontal</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #333;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+        .horizontal-gallery {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+            scroll-snap-type: x mandatory;
+        }
+        .horizontal-gallery::-webkit-scrollbar {
+            height: 8px;
+        }
+        .horizontal-gallery::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .horizontal-gallery::-webkit-scrollbar-track {
+            background: #555;
+        }
+        .card {
+            flex: 0 0 300px;
+            margin-right: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #444;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            scroll-snap-align: start;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card:last-child {
+            margin-right: 0;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .card a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-content h3 {
+            margin-top: 0;
+        }
+        .card-content p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galerie Design 3 - Défilement Horizontal</h1>
+    <div class="horizontal-gallery">
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250801_173204.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250801_173204.png" alt="Analyse 1">
+                <div class="card-content">
+                    <h3>Analyse 1</h3>
+                    <p>2025-08-01 17:32:04</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250801_175536.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250801_175536.png" alt="Analyse 2">
+                <div class="card-content">
+                    <h3>Analyse 2</h3>
+                    <p>2025-08-01 17:55:36</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250801_230013.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250801_230013.png" alt="Analyse 3">
+                <div class="card-content">
+                    <h3>Analyse 3</h3>
+                    <p>2025-08-01 23:00:13</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250802_105919.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250802_105919.png" alt="Analyse 4">
+                <div class="card-content">
+                    <h3>Analyse 4</h3>
+                    <p>2025-08-02 10:59:19</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250802_150419.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250802_150419.png" alt="Analyse 5">
+                <div class="card-content">
+                    <h3>Analyse 5</h3>
+                    <p>2025-08-02 15:04:19</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250802_151214.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250802_151214.png" alt="Analyse 6">
+                <div class="card-content">
+                    <h3>Analyse 6</h3>
+                    <p>2025-08-02 15:12:14</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250803_000535.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250803_000535.png" alt="Analyse 7">
+                <div class="card-content">
+                    <h3>Analyse 7</h3>
+                    <p>2025-08-03 00:05:35</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250803_001332.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250803_001332.png" alt="Analyse 8">
+                <div class="card-content">
+                    <h3>Analyse 8</h3>
+                    <p>2025-08-03 00:13:32</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250803_003014.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250803_003014.png" alt="Analyse 9">
+                <div class="card-content">
+                    <h3>Analyse 9</h3>
+                    <p>2025-08-03 00:30:14</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250803_233055.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250803_233055.png" alt="Analyse 10">
+                <div class="card-content">
+                    <h3>Analyse 10</h3>
+                    <p>2025-08-03 23:30:55</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250803_235554.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250803_235554.png" alt="Analyse 11">
+                <div class="card-content">
+                    <h3>Analyse 11</h3>
+                    <p>2025-08-03 23:55:54</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250805_005702.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250805_005702.png" alt="Analyse 12">
+                <div class="card-content">
+                    <h3>Analyse 12</h3>
+                    <p>2025-08-05 00:57:02</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250805_011020.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250805_011020.png" alt="Analyse 13">
+                <div class="card-content">
+                    <h3>Analyse 13</h3>
+                    <p>2025-08-05 01:10:20</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="../published/notebooks/duckit_analysis_20250805_013007.ipynb">
+                <img src="../published/notebooks/duckit_analysis_20250805_013007.png" alt="Analyse 14">
+                <div class="card-content">
+                    <h3>Analyse 14</h3>
+                    <p>2025-08-05 01:30:07</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

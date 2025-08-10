@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": null}, "axis": {"grid": false, "tickSize": 0}, "title": {"anchor": "start", "color": "#333", "fontSize": 16}}, "data": {"name": "data-fdccbf77cf743d5d0e72b05a65f50a25"}, "mark": {"type": "bar", "cornerRadiusEnd": 2, "stroke": "#f0f0f0", "strokeWidth": 1}, "encoding": {"color": {"field": "genre", "legend": {"title": "Genre"}, "scale": {"domain": ["hommes", "femmes"], "range": ["#1f77b4", "#d62728"]}, "type": "nominal"}, "tooltip": [{"field": "genre", "title": "Genre", "type": "nominal"}, {"field": "tranche_age", "title": "Tranche d'\u00e2ge", "type": "nominal"}, {"field": "nombre", "format": ",", "title": "Effectif", "type": "quantitative"}], "x": {"axis": {"format": "s"}, "field": "nombre_signe", "title": "Population", "type": "quantitative"}, "y": {"axis": {"labelFontSize": 12}, "field": "tranche_age", "sort": {"field": "order", "order": "descending"}, "title": null, "type": "nominal"}}, "height": 350, "title": "Pyramide des \u00e2ges des \u00e9lus conseillers municipaux", "width": 500, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-fdccbf77cf743d5d0e72b05a65f50a25": [{"tranche_age": "15.0-19.0", "order": 15.0, "genre": "hommes", "nombre": 14.0, "signe": -1, "nombre_signe": -14.0}, {"tranche_age": "20.0-24.0", "order": 20.0, "genre": "hommes", "nombre": 947.0, "signe": -1, "nombre_signe": -947.0}, {"tranche_age": "25.0-29.0", "order": 25.0, "genre": "hommes", "nombre": 3958.0, "signe": -1, "nombre_signe": -3958.0}, {"tranche_age": "30.0-34.0", "order": 30.0, "genre": "hommes", "nombre": 8478.0, "signe": -1, "nombre_signe": -8478.0}, {"tranche_age": "35.0-39.0", "order": 35.0, "genre": "hommes", "nombre": 16546.0, "signe": -1, "nombre_signe": -16546.0}, {"tranche_age": "40.0-44.0", "order": 40.0, "genre": "hommes", "nombre": 24758.0, "signe": -1, "nombre_signe": -24758.0}, {"tranche_age": "45.0-49.0", "order": 45.0, "genre": "hommes", "nombre": 29262.0, "signe": -1, "nombre_signe": -29262.0}, {"tranche_age": "50.0-54.0", "order": 50.0, "genre": "hommes", "nombre": 35820.0, "signe": -1, "nombre_signe": -35820.0}, {"tranche_age": "55.0-59.0", "order": 55.0, "genre": "hommes", "nombre": 33873.0, "signe": -1, "nombre_signe": -33873.0}, {"tranche_age": "60.0-64.0", "order": 60.0, "genre": "hommes", "nombre": 36590.0, "signe": -1, "nombre_signe": -36590.0}, {"tranche_age": "65.0-69.0", "order": 65.0, "genre": "hommes", "nombre": 39433.0, "signe": -1, "nombre_signe": -39433.0}, {"tranche_age": "70.0-74.0", "order": 70.0, "genre": "hommes", "nombre": 31161.0, "signe": -1, "nombre_signe": -31161.0}, {"tranche_age": "75.0-79.0", "order": 75.0, "genre": "hommes", "nombre": 17418.0, "signe": -1, "nombre_signe": -17418.0}, {"tranche_age": "80.0-84.0", "order": 80.0, "genre": "hommes", "nombre": 3809.0, "signe": -1, "nombre_signe": -3809.0}, {"tranche_age": "85.0-89.0", "order": 85.0, "genre": "hommes", "nombre": 713.0, "signe": -1, "nombre_signe": -713.0}, {"tranche_age": "90.0-94.0", "order": 90.0, "genre": "hommes", "nombre": 83.0, "signe": -1, "nombre_signe": -83.0}, {"tranche_age": "15.0-19.0", "order": 15.0, "genre": "femmes", "nombre": 6.0, "signe": 1, "nombre_signe": 6.0}, {"tranche_age": "20.0-24.0", "order": 20.0, "genre": "femmes", "nombre": 608.0, "signe": 1, "nombre_signe": 608.0}, {"tranche_age": "25.0-29.0", "order": 25.0, "genre": "femmes", "nombre": 2313.0, "signe": 1, "nombre_signe": 2313.0}, {"tranche_age": "30.0-34.0", "order": 30.0, "genre": "femmes", "nombre": 6017.0, "signe": 1, "nombre_signe": 6017.0}, {"tranche_age": "35.0-39.0", "order": 35.0, "genre": "femmes", "nombre": 13735.0, "signe": 1, "nombre_signe": 13735.0}, {"tranche_age": "40.0-44.0", "order": 40.0, "genre": "femmes", "nombre": 22686.0, "signe": 1, "nombre_signe": 22686.0}, {"tranche_age": "45.0-49.0", "order": 45.0, "genre": "femmes", "nombre": 26538.0, "signe": 1, "nombre_signe": 26538.0}, {"tranche_age": "50.0-54.0", "order": 50.0, "genre": "femmes", "nombre": 29887.0, "signe": 1, "nombre_signe": 29887.0}, {"tranche_age": "55.0-59.0", "order": 55.0, "genre": "femmes", "nombre": 26428.0, "signe": 1, "nombre_signe": 26428.0}, {"tranche_age": "60.0-64.0", "order": 60.0, "genre": "femmes", "nombre": 24474.0, "signe": 1, "nombre_signe": 24474.0}, {"tranche_age": "65.0-69.0", "order": 65.0, "genre": "femmes", "nombre": 23911.0, "signe": 1, "nombre_signe": 23911.0}, {"tranche_age": "70.0-74.0", "order": 70.0, "genre": "femmes", "nombre": 17211.0, "signe": 1, "nombre_signe": 17211.0}, {"tranche_age": "75.0-79.0", "order": 75.0, "genre": "femmes", "nombre": 8898.0, "signe": 1, "nombre_signe": 8898.0}, {"tranche_age": "80.0-84.0", "order": 80.0, "genre": "femmes", "nombre": 1880.0, "signe": 1, "nombre_signe": 1880.0}, {"tranche_age": "85.0-89.0", "order": 85.0, "genre": "femmes", "nombre": 326.0, "signe": 1, "nombre_signe": 326.0}, {"tranche_age": "90.0-94.0", "order": 90.0, "genre": "femmes", "nombre": 35.0, "signe": 1, "nombre_signe": 35.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

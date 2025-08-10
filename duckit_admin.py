@@ -127,4 +127,4 @@ with gr.Blocks() as demo:
         gallery_button.click(run_gallery_generation, outputs=[gallery_output, html_preview, download_button])
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(allowed_paths=["published"])

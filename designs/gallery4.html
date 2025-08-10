@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Design 4 - Carrousel 3D</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 80%;
+            max-width: 1000px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .carousel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 60%;
+            height: 100%;
+            top: 0;
+            left: 20%;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-item .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .carousel-item.active .title-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .overlay-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: all; /* Allow clicks on buttons */
+        }
+
+        .colab-link img {
+            height: 24px;
+            width: auto;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        #prev-btn {
+            left: -50px;
+        }
+
+        #next-btn {
+            right: -50px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content img {
+            width: auto;
+            height: auto;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .html-modal-content {
+            width: 90%;
+            height: 90%;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .html-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galerie Design 4 - Carrousel 3D</h1>
+    <div class="carousel-container">
+        <div class="carousel">
+            <!-- Les éléments seront insérés ici par JavaScript -->
+        </div>
+        <button id="prev-btn" class="nav-btn">‹</button>
+        <button id="next-btn" class="nav-btn">›</button>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal" onclick="closeModal()">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="modal-image">
+        </div>
+    </div>
+
+    <!-- HTML Content Modal -->
+    <div id="html-modal" class="modal" onclick="closeModal()">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div class="html-modal-content" onclick="event.stopPropagation()">
+            <iframe id="html-iframe" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const analyses = [
+                { title: "Cartographie de la Température Moyenne", notebook: "duckit_analysis_20250801_173204.ipynb", image: "duckit_analysis_20250801_173204.png" },
+                { title: "Analyse des Équipements Sportifs", notebook: "duckit_analysis_20250801_175536.ipynb", image: "duckit_analysis_20250801_175536.png" },
+                { title: "Cartographie des Musées de France", notebook: "duckit_analysis_20250801_230013.ipynb", image: "duckit_analysis_20250801_230013.png" },
+                { title: "Recherche du terrain de football parfait", notebook: "duckit_analysis_20250802_105919.ipynb", image: "duckit_analysis_20250802_105919.png" },
+                { title: "Analyse des températures maximales", notebook: "duckit_analysis_20250802_150419.ipynb", image: "duckit_analysis_20250802_150419.png" },
+                { title: "Anomalies Thermiques en France", notebook: "duckit_analysis_20250802_151214.ipynb", image: "duckit_analysis_20250802_151214.png" },
+                { title: "Analyse Multidimensionnelle des Chansons de Rap", notebook: "duckit_analysis_20250803_000535.ipynb", image: "duckit_analysis_20250803_000535.png" },
+                { title: "Analyse 3D des Chansons de Rap", notebook: "duckit_analysis_20250803_001332.ipynb", image: "duckit_analysis_20250803_001332.png" },
+                { title: "Évolution de la Vulgarité par Genre Musical", notebook: "duckit_analysis_20250803_003014.ipynb", image: "duckit_analysis_20250803_003014.png" },
+                { title: "Validations Transilien", notebook: "duckit_analysis_20250803_233055.ipynb", image: "duckit_analysis_20250803_233055.png" },
+                { title: "Cartographier les excès de vitesse", notebook: "duckit_analysis_20250803_235554.ipynb", image: "duckit_analysis_20250803_235554.png" },
+                { title: "Analyse des Propriétés de l'État", notebook: "duckit_analysis_20250805_005702.ipynb", image: "duckit_analysis_20250805_005702.png" },
+                { title: "Répartition des Équipements Sportifs", notebook: "duckit_analysis_20250805_011020.ipynb", image: "duckit_analysis_20250805_011020.png" },
+                { title: "Répartition des Élus par Sexe", notebook: "duckit_analysis_20250805_013007.ipynb", image: "duckit_analysis_20250805_013007.png" },
+                { title: "Cartographie Interactive du Métro", notebook: "duckit_analysis_20250805_224956.ipynb", image: "duckit_analysis_20250805_224956.png", html: "duckit_analysis_20250805_224956.html" }
+            ];
+
+            const carousel = document.querySelector('.carousel');
+            const GITHUB_REPO_URL = 'https://github.com/AliHmaou/batchbooks/blob/main/published/notebooks/';
+            let currentIndex = 0;
+
+            function createCarouselItems() {
+                carousel.innerHTML = '';
+                analyses.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.classList.add('carousel-item');
+                    div.dataset.index = index;
+
+                    const imagePath = `../published/notebooks/${item.image}`;
+                    const modalTarget = item.html ? `../published/notebooks/${item.html}` : imagePath;
+                    const modalFn = item.html ? 'openHtmlModal' : 'openImageModal';
+                    div.setAttribute('onclick', `${modalFn}('${modalTarget}')`);
+
+                    const colabLink = GITHUB_REPO_URL + item.notebook;
+
+                    div.innerHTML = `
+                        <img src="${imagePath}" alt="${item.title}">
+                        <div class="title-overlay">
+                            <div class="overlay-content">
+                                <h3>${item.title}</h3>
+                                <div class="item-actions">
+                                    <a href="${colabLink}" target="_blank" class="colab-link" onclick="event.stopPropagation();">
+                                        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    carousel.appendChild(div);
+                });
+            }
+
+            function updateCarousel() {
+                const items = document.querySelectorAll('.carousel-item');
+                items.forEach((item) => {
+                    const itemIndex = parseInt(item.dataset.index);
+                    const relativeIndex = itemIndex - currentIndex;
+                    
+                    let newTransform = '';
+                    let opacity = 1;
+
+                    item.classList.remove('active');
+
+                    if (relativeIndex === 0) {
+                        // Center item
+                        newTransform = 'translateX(0) translateZ(0) scale(1)';
+                        opacity = 1;
+                        item.classList.add('active');
+                    } else if (relativeIndex === 1 || (relativeIndex === -(analyses.length - 1))) {
+                        // Right item
+                        newTransform = 'translateX(50%) translateZ(-200px) rotateY(-30deg) scale(0.8)';
+                        opacity = 0.7;
+                    } else if (relativeIndex === -1 || (relativeIndex === analyses.length - 1)) {
+                        // Left item
+                        newTransform = 'translateX(-50%) translateZ(-200px) rotateY(30deg) scale(0.8)';
+                        opacity = 0.7;
+                    } else {
+                        // Hidden items
+                        newTransform = `translateX(${relativeIndex > 0 ? 100 : -100}%) translateZ(-500px) scale(0.5)`;
+                        opacity = 0;
+                    }
+                    
+                    item.style.transform = newTransform;
+                    item.style.opacity = opacity;
+                    item.style.zIndex = relativeIndex === 0 ? 3 : (Math.abs(relativeIndex) === 1 ? 2 : 1);
+                });
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % analyses.length;
+                updateCarousel();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + analyses.length) % analyses.length;
+                updateCarousel();
+            }
+
+            window.openImageModal = function(src) {
+                document.getElementById('modal-image').src = src;
+                document.getElementById('image-modal').style.display = 'flex';
+            }
+
+            window.openHtmlModal = function(src) {
+                document.getElementById('html-iframe').src = src;
+                document.getElementById('html-modal').style.display = 'flex';
+            }
+
+            window.closeModal = function() {
+                document.getElementById('image-modal').style.display = 'none';
+                document.getElementById('modal-image').src = '';
+                document.getElementById('html-modal').style.display = 'none';
+                document.getElementById('html-iframe').src = '';
+            }
+
+            document.getElementById('next-btn').addEventListener('click', showNext);
+            document.getElementById('prev-btn').addEventListener('click', showPrev);
+            
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    closeModal();
+                }
+            });
+
+            createCarouselItems();
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>

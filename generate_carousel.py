@@ -48,25 +48,22 @@ def generate_html_gallery():
         title = get_notebook_title(notebook_path)
         colab_url = f"https://colab.research.google.com/github/{GITHUB_REPO}/blob/main/{notebook_path}"
         
-        # The path should be relative to the index.html file
-        relative_thumbnail_path = thumbnail_path.relative_to(OUTPUT_HTML_FILE.parent).as_posix()
-        html_preview_path = thumbnail_path.with_suffix('.html')
-        
+        # Paths should be relative to the output HTML file's location (the 'published' directory)
+        simple_thumbnail_path = thumbnail_path.relative_to(NOTEBOOK_FOLDER.parent).as_posix()
+        simple_html_path = thumbnail_path.with_suffix('.html').relative_to(NOTEBOOK_FOLDER.parent).as_posix()
+
         # Check if an HTML preview exists for this notebook
-        has_html_preview = html_preview_path.exists()
-        
-        # The path for the iframe should be relative to the index.html file
-        relative_html_path = html_preview_path.relative_to(OUTPUT_HTML_FILE.parent).as_posix()
+        has_html_preview = thumbnail_path.with_suffix('.html').exists()
 
         click_action = ""
         if has_html_preview:
-            click_action = f"openHtmlModal('{relative_html_path}')"
+            click_action = f"openHtmlModal('{simple_html_path}')"
         else:
-            click_action = f"openImageModal('{relative_thumbnail_path}')"
+            click_action = f"openImageModal('{simple_thumbnail_path}')"
 
         items_html += f"""
         <div class="gallery-item" onclick="{click_action}" title="{title}">
-            <img src="{relative_thumbnail_path}" alt="{title}" loading="lazy">
+            <img src="{simple_thumbnail_path}" alt="{title}" loading="lazy">
             <div class="title-overlay">
                 <div class="overlay-content">
                     <h3>{title}</h3>
@@ -169,6 +166,9 @@ def generate_html_gallery():
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }}
+        .colab-link {{
+            pointer-events: auto;
         }}
         .colab-link img {{
             height: 24px;

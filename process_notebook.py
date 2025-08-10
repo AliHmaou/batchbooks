@@ -9,11 +9,12 @@ from pathlib import Path
 FINAL_OBJECT_VARIABLE_NAME = "dataviz"  # Nouvelle convention
 NOTEBOOK_FOLDER = Path("./notebooks")
 
-def capture_folium_map(html_path, output_png_path):
-    """Prend une capture d'écran d'un fichier HTML local avec Selenium."""
-    print("--> Initialisation du navigateur headless pour la capture de la carte Folium...")
+def capture_html_screenshot(html_path, output_png_path):
+    """Prend une capture d'écran adaptative d'un fichier HTML local avec Selenium."""
+    print("--> Initialisation du navigateur headless pour la capture HTML...")
     try:
         from selenium import webdriver
+        from selenium.common.exceptions import TimeoutException, WebDriverException
         from selenium.webdriver.chrome.service import Service as ChromeService
         from webdriver_manager.chrome import ChromeDriverManager
         from selenium.webdriver.chrome.options import Options
@@ -21,40 +22,121 @@ def capture_folium_map(html_path, output_png_path):
         from selenium.webdriver.support import expected_conditions as EC
         from selenium.webdriver.common.by import By
     except ImportError:
-        print("ERREUR: 'selenium' et 'webdriver-manager' sont requis pour exporter Folium.", file=sys.stderr)
+        print("ERREUR: 'selenium' et 'webdriver-manager' sont requis.", file=sys.stderr)
         print("Veuillez les installer avec : pip install selenium webdriver-manager", file=sys.stderr)
         return
 
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--window-size=1600,1200") # Taille de la fenêtre virtuelle
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--hide-scrollbars")
+    # La taille de la fenêtre sera définie dynamiquement
 
     driver = None
     try:
-        # webdriver-manager va télécharger et gérer le driver pour nous
-        service = ChromeService(ChromeDriverManager().install())
+        print("--> Vérification/téléchargement du WebDriver...")
+        try:
+            service = ChromeService(ChromeDriverManager().install())
+        except Exception as e:
+            print("ERREUR CRITIQUE: Impossible de télécharger ou d'installer le WebDriver pour Chrome.", file=sys.stderr)
+            print(f"Détail de l'erreur : {e}", file=sys.stderr)
+            print("Vérifiez votre connexion internet ou la configuration de votre pare-feu.", file=sys.stderr)
+            return
+
         driver = webdriver.Chrome(service=service, options=chrome_options)
-        
-        # Ouvre le fichier HTML local en utilisant un URI de fichier
         driver.get(Path(html_path).resolve().as_uri())
-        
-        # Attente robuste que les tuiles de la carte soient chargées
-        print("--> Attente du chargement des tuiles de la carte...")
-        wait = WebDriverWait(driver, 15) # Attendre jusqu'à 15 secondes
-        wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "leaflet-tile-loaded")))
-        time.sleep(0.5) # Petite pause supplémentaire pour le rendu final
-        
+
+        print("--> Attente du chargement du contenu interactif...")
+        wait = WebDriverWait(driver, 20) # Timeout augmenté à 20 secondes
+
+        try:
+            with open(html_path, 'r', encoding='utf-8') as f:
+                header = f.read(4096)
+
+            if 'plotly' in header:
+                print("--> Détecté : Plotly. Attente du conteneur du graphique.")
+                wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".svg-container, .main-svg, .plotly-graph-div")))
+            elif 'folium' in header or 'leaflet' in header:
+                print("--> Détecté : Folium/Leaflet. Attente des tuiles de la carte.")
+                wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "leaflet-tile-loaded")))
+            elif 'altair' in header or 'vega' in header:
+                print("--> Détecté : Altair/Vega. Attente du canvas.")
+                wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))
+            elif 'bokeh' in header:
+                print("--> Détecté : Bokeh. Attente du canvas.")
+                wait.until(EC.presence_of_element_located((By.CLASS_NAME, "bk-canvas")))
+            else:
+                print("--> Type de HTML non reconnu, pause de sécurité (3s).")
+                time.sleep(3)
+        except TimeoutException:
+            print("AVERTISSEMENT: Le contenu interactif n'a pas été détecté dans le temps imparti.", file=sys.stderr)
+            print("--> Utilisation d'une pause de sécurité étendue (5s).", file=sys.stderr)
+            time.sleep(5)
+
+        time.sleep(1.5) # Pause supplémentaire pour le rendu final
+
+        print("--> Ajustement dynamique de la taille de la fenêtre...")
+        try:
+            # On mesure la taille du contenu de la page
+            size = driver.execute_script("""
+                return {
+                    width: document.body.scrollWidth,
+                    height: document.body.scrollHeight
+                }
+            """)
+            width = size['width'] + 20  # Ajout d'une petite marge
+            height = size['height'] + 20
+            
+            print(f"--> Contenu détecté : {size['width']}x{size['height']}. Redimensionnement à {width}x{height}.")
+            driver.set_window_size(width, height)
+            time.sleep(0.5) # Laisse le temps au navigateur de redessiner
+
+        except Exception as e:
+            print(f"AVERTISSEMENT: Impossible d'ajuster la taille dynamiquement. Utilisation de 1600x1200. Erreur: {e}", file=sys.stderr)
+            driver.set_window_size(1600, 1200)
+
         driver.save_screenshot(output_png_path)
-        print(f"--> Capture d'écran de la carte sauvegardée dans : {output_png_path}")
-        
+        print(f"--> Capture d'écran sauvegardée dans : {output_png_path}")
+
+    except WebDriverException as e:
+        print(f"ERREUR WebDriver: {e}", file=sys.stderr)
+        print("Assurez-vous que Google Chrome est installé et accessible.", file=sys.stderr)
     except Exception as e:
-        print(f"ERREUR lors de la capture d'écran avec Selenium : {e}", file=sys.stderr)
-        print("Assurez-vous que Google Chrome est installé sur le système.", file=sys.stderr)
+        print(f"ERREUR inattendue lors de la capture d'écran : {e}", file=sys.stderr)
     finally:
         if driver:
             driver.quit()
+
+
+def center_html_content(html_path):
+    """Injecte du CSS pour améliorer l'affichage, sans forcer un centrage qui pourrait nuire à la capture."""
+    print(f"--> Ajustement CSS pour : {html_path}")
+    try:
+        with open(html_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Style plus simple: assure un fond blanc et un minimum de padding.
+        # Ne force plus le centrage flexbox qui peut casser la mesure de la taille.
+        style_wrapper = """
+<style>
+    body {
+        background-color: #ffffff; /* Fond blanc pour la capture */
+        margin: 0;
+        padding: 10px; /* Un peu d'espace autour */
+    }
+</style>
+"""
+        if '</head>' in content:
+            content = content.replace('</head>', f'{style_wrapper}</head>', 1)
+        else:
+            content = f"<head>{style_wrapper}</head>" + content
+
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print("--> CSS ajusté avec succès.")
+
+    except Exception as e:
+        print(f"AVERTISSEMENT: N'a pas pu ajuster le CSS. Erreur: {e}", file=sys.stderr)
 
 
 def create_export_cell(output_image_name, output_html_name):
@@ -76,6 +158,11 @@ OUTPUT_HTML_NAME = {repr(output_html_name)}
 # ===================================================================
 import sys
 import os
+# On importe les modules nécessaires pour l'export au cas où
+try:
+    from bokeh.io import save as bokeh_save
+except ImportError:
+    bokeh_save = None
 
 try:
     # On s'assure que le dossier de sortie existe
@@ -95,14 +182,33 @@ try:
     object_type = str(type(final_object))
 
     if 'plotly.graph_objs._figure.Figure' in object_type:
-        print(f"--> Détecté : Plotly. Sauvegarde dans : {OUTPUT_IMAGE_NAME}")
-        final_object.write_image(OUTPUT_IMAGE_NAME, scale=2, width=1200, height=800)
-    elif 'matplotlib.figure.Figure' in object_type:
-        print(f"--> Détecté : Matplotlib. Sauvegarde dans : {OUTPUT_IMAGE_NAME}")
-        final_object.savefig(OUTPUT_IMAGE_NAME, dpi=300, bbox_inches='tight')
+        print(f"--> Détecté : Plotly. Sauvegarde HTML et PNG.")
+        # 1. Sauvegarde HTML pour l'interactivité
+        print(f"--> Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
+        final_object.write_html(OUTPUT_HTML_NAME, include_plotlyjs='cdn')
+        # 2. Sauvegarde PNG pour l'aperçu statique
+        try:
+            print(f"--> Tentative de sauvegarde PNG directe dans : {OUTPUT_IMAGE_NAME}")
+            final_object.write_image(OUTPUT_IMAGE_NAME, scale=3, width=1200, height=800)
+            print(f"--> Image Plotly sauvegardée avec succès.")
+        except Exception as e:
+            print(f"AVERTISSEMENT: La sauvegarde directe en PNG a échoué (kaleido est-il installé?). L'image statique ne sera pas générée.", file=sys.stderr)
+            print(f"   Erreur: {e}", file=sys.stderr)
     elif 'folium.folium.Map' in object_type:
         print(f"--> Détecté : Folium. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
         final_object.save(OUTPUT_HTML_NAME)
+        # On crée un fichier marqueur pour que le script de post-traitement sache qu'il s'agit de Folium
+        with open(f"{OUTPUT_HTML_NAME}.is_folium", "w") as f:
+            f.write("true")
+    elif 'altair.vegalite' in object_type and hasattr(final_object, 'save'):
+        print(f"--> Détecté : Altair. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
+        final_object.save(OUTPUT_HTML_NAME)
+    elif 'bokeh.plotting' in object_type and bokeh_save is not None:
+        print(f"--> Détecté : Bokeh. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
+        bokeh_save(final_object, filename=OUTPUT_HTML_NAME, title="")
+    elif 'matplotlib.figure.Figure' in object_type:
+        print(f"--> Détecté : Matplotlib. Sauvegarde dans : {OUTPUT_IMAGE_NAME}")
+        final_object.savefig(OUTPUT_IMAGE_NAME, dpi=300, bbox_inches='tight')
     else:
         print(f"AVERTISSEMENT: Type non supporté : {object_type}", file=sys.stderr)
 except NameError:
@@ -152,14 +258,24 @@ def process_notebook(notebook_path_str):
             check=True, capture_output=True, text=True)
         print("Exécution terminée.")
 
-        # POST-TRAITEMENT pour Folium
+        # POST-TRAITEMENT : capture d'écran pour Folium uniquement
         if output_html_path.exists():
-            capture_folium_map(str(output_html_path), str(output_png_path))
+            folium_marker_path = Path(f"{output_html_path}.is_folium")
+            if folium_marker_path.exists():
+                print("--> Fichier HTML Folium détecté. Lancement de la capture d'écran.")
+                center_html_content(str(output_html_path))
+                capture_html_screenshot(str(output_html_path), str(output_png_path))
+                folium_marker_path.unlink() # Nettoyage du marqueur
+            else:
+                print(f"--> Fichier HTML {output_html_path.name} trouvé, mais ce n'est pas une carte Folium. Capture d'écran sautée.")
         else:
-            print("Aucun fichier HTML trouvé, pas de post-traitement Folium nécessaire.")
+            print("--> Aucun fichier HTML trouvé, pas de capture d'écran nécessaire.")
 
     except subprocess.CalledProcessError as e:
         print(f"ERREUR lors de l'exécution de {notebook_path}.", file=sys.stderr)
+        print("--- STDOUT ---")
+        print(e.stdout)
+        print("--- STDERR ---", file=sys.stderr)
         print(e.stderr, file=sys.stderr)
     finally:
         temp_notebook_path.unlink(missing_ok=True)
