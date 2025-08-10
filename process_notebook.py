@@ -3,11 +3,13 @@ import json
 import subprocess
 import time
 import textwrap
+import shutil
 from pathlib import Path
 
 # --- Configuration ---
-FINAL_OBJECT_VARIABLE_NAME = "dataviz"  # Nouvelle convention
-NOTEBOOK_FOLDER = Path("./notebooks")
+FINAL_OBJECT_VARIABLE_NAME = "dataviz"
+ROOT_NOTEBOOK_FOLDER = Path(".")
+PUBLISHED_NOTEBOOK_FOLDER = Path("./published/notebooks")
 
 def capture_html_screenshot(html_path, output_png_path):
     """Prend une capture d'écran adaptative d'un fichier HTML local avec Selenium."""
@@ -192,7 +194,7 @@ try:
             final_object.write_image(OUTPUT_IMAGE_NAME, scale=3, width=1200, height=800)
             print(f"--> Image Plotly sauvegardée avec succès.")
         except Exception as e:
-            print(f"AVERTISSEMENT: La sauvegarde directe en PNG a échoué (kaleido est-il installé?). L'image statique ne sera pas générée.", file=sys.stderr)
+            print(f"AVERTISSESEMENT: La sauvegarde directe en PNG a échoué (kaleido est-il installé?). L'image statique ne sera pas générée.", file=sys.stderr)
             print(f"   Erreur: {e}", file=sys.stderr)
     elif 'folium.folium.Map' in object_type:
         print(f"--> Détecté : Folium. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
@@ -224,70 +226,86 @@ except Exception as e:
     }
 
 def process_notebook(notebook_path_str):
-    """Modifie, exécute et nettoie un notebook."""
+    """Modifie, exécute, et déplace un notebook du répertoire racine vers le dossier de publication."""
     notebook_path = Path(notebook_path_str)
-    output_png_path = notebook_path.with_suffix('.png')
-    output_html_path = notebook_path.with_suffix('.html')
+
+    # Définir les chemins de destination dans `published/notebooks`
+    dest_notebook_path = PUBLISHED_NOTEBOOK_FOLDER / notebook_path.name
+    dest_png_path = dest_notebook_path.with_suffix('.png')
+    dest_html_path = dest_notebook_path.with_suffix('.html')
 
     # --- VÉRIFICATION D'EXISTENCE ---
-    if output_png_path.exists():
-        print(f"L'image {output_png_path.name} existe déjà. Saut du traitement.")
+    if dest_png_path.exists():
+        print(f"AVERTISSEMENT: L'image {dest_png_path.name} existe déjà dans la destination.")
+        print(f"Le notebook '{notebook_path.name}' n'a pas été traité. Veuillez le renommer ou le supprimer.")
         return
 
     print("-" * 50)
-    print(f"Traitement du notebook : {notebook_path}")
+    print(f"Traitement du notebook : {notebook_path.name}")
 
     base_name = notebook_path.stem
-    # Le notebook et le HTML temporaires sont créés à la racine pour l'exécution
     temp_notebook_path = Path(f"temp_{base_name}.ipynb")
 
     with open(notebook_path, 'r', encoding='utf-8') as f:
         nb_content = json.load(f)
 
-    # On passe les chemins complets à la cellule d'exportation
-    nb_content['cells'].append(create_export_cell(str(output_png_path), str(output_html_path)))
+    # La cellule d'exportation pointera directement vers la destination finale
+    nb_content['cells'].append(create_export_cell(str(dest_png_path), str(dest_html_path)))
 
     with open(temp_notebook_path, 'w', encoding='utf-8') as f:
         json.dump(nb_content, f)
 
     try:
-        print(f"Lancement de l'exécution de {temp_notebook_path}...")
+        print(f"Lancement de l'exécution de {temp_notebook_path.name}...")
         subprocess.run(
             [sys.executable, '-m', 'jupyter', 'nbconvert', '--execute',
              '--to', 'notebook', '--inplace', str(temp_notebook_path), '--allow-errors'],
-            check=True, capture_output=True, text=True)
+            check=True, capture_output=True, text=True, encoding='utf-8')
         print("Exécution terminée.")
 
         # POST-TRAITEMENT : capture d'écran pour Folium uniquement
-        if output_html_path.exists():
-            folium_marker_path = Path(f"{output_html_path}.is_folium")
+        if dest_html_path.exists():
+            folium_marker_path = Path(f"{dest_html_path}.is_folium")
             if folium_marker_path.exists():
                 print("--> Fichier HTML Folium détecté. Lancement de la capture d'écran.")
-                center_html_content(str(output_html_path))
-                capture_html_screenshot(str(output_html_path), str(output_png_path))
+                center_html_content(str(dest_html_path))
+                capture_html_screenshot(str(dest_html_path), str(dest_png_path))
                 folium_marker_path.unlink() # Nettoyage du marqueur
             else:
-                print(f"--> Fichier HTML {output_html_path.name} trouvé, mais ce n'est pas une carte Folium. Capture d'écran sautée.")
+                print(f"--> Fichier HTML {dest_html_path.name} trouvé, mais ce n'est pas une carte Folium. Capture d'écran sautée.")
         else:
             print("--> Aucun fichier HTML trouvé, pas de capture d'écran nécessaire.")
 
+        # Si tout réussit, on déplace le notebook exécuté et on supprime l'original
+        PUBLISHED_NOTEBOOK_FOLDER.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(temp_notebook_path), str(dest_notebook_path))
+        notebook_path.unlink()
+        print(f"Le notebook '{notebook_path.name}' a été traité et déplacé vers '{dest_notebook_path}'.")
+
     except subprocess.CalledProcessError as e:
-        print(f"ERREUR lors de l'exécution de {notebook_path}.", file=sys.stderr)
+        print(f"ERREUR lors de l'exécution de {notebook_path.name}.", file=sys.stderr)
         print("--- STDOUT ---")
         print(e.stdout)
         print("--- STDERR ---", file=sys.stderr)
         print(e.stderr, file=sys.stderr)
+        print(f"Le notebook original '{notebook_path.name}' a été laissé dans le répertoire racine pour inspection.", file=sys.stderr)
     finally:
+        # Nettoie le fichier temporaire uniquement s'il existe encore (en cas d'échec)
         temp_notebook_path.unlink(missing_ok=True)
-        print(f"Nettoyage du fichier temporaire : {temp_notebook_path}")
+
 
 if __name__ == "__main__":
-    notebooks_to_run = [p for p in NOTEBOOK_FOLDER.glob('*.ipynb')
+    # S'assurer que le dossier de publication existe
+    PUBLISHED_NOTEBOOK_FOLDER.mkdir(parents=True, exist_ok=True)
+
+    # Chercher les notebooks uniquement à la racine du projet
+    notebooks_to_run = [p for p in ROOT_NOTEBOOK_FOLDER.glob('*.ipynb')
                         if not p.name.startswith(('temp_', '_temp_'))]
 
     if not notebooks_to_run:
-        print("Aucun notebook .ipynb trouvé pour le traitement.")
+        print("Aucun notebook .ipynb trouvé à la racine du projet pour le traitement.")
     else:
+        print(f"Trouvé {len(notebooks_to_run)} notebook(s) à traiter...")
         for notebook in notebooks_to_run:
             process_notebook(str(notebook))
     
