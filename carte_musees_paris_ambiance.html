@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+<style>
+    .folium-map {
+        border: 3px solid #8B4513;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_89e83e00015e30fe7ae93d1efa58ef3b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_89e83e00015e30fe7ae93d1efa58ef3b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_89e83e00015e30fe7ae93d1efa58ef3b = L.map(
+                "map_89e83e00015e30fe7ae93d1efa58ef3b",
+                {
+                    center: [48.8567, 2.3508],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_879ad756027ccd0192195e1835d27bfa = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap contributors \u00a9 CARTO",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_879ad756027ccd0192195e1835d27bfa.addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+            var marker_a713f0d0a814592ab9ec0a409b160098 = L.marker(
+                [48.866136805463356, 2.297248499625773],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+            var icon_e208bbe388967341c98822c7e7db061e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "building-columns",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6f6303ecda132d17b27b6e7c3db7b9b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_02115de9d980430e95c38c3ac8a41e3e = $(`<div id="html_02115de9d980430e95c38c3ac8a41e3e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">Palais Galliera, musée de la mode et de la ville de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8661</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2972</p>     </div>     </div>`)[0];
+                popup_b6f6303ecda132d17b27b6e7c3db7b9b.setContent(html_02115de9d980430e95c38c3ac8a41e3e);
+            
+        
+
+        marker_a713f0d0a814592ab9ec0a409b160098.bindPopup(popup_b6f6303ecda132d17b27b6e7c3db7b9b)
+        ;
+
+        
+    
+    
+                marker_a713f0d0a814592ab9ec0a409b160098.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_5e3a97ff809b53f63d09a0998d45e70d = L.marker(
+                [48.86609, 2.313763],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_f6ea4a0cd22d392861f95d812a413268 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0e474ae25632a91e049ea9463f9034a5 = $(`<div id="html_0e474ae25632a91e049ea9463f9034a5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">Petit Palais, musée des beaux-arts de la ville de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8661</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3138</p>     </div>     </div>`)[0];
+                popup_f6ea4a0cd22d392861f95d812a413268.setContent(html_0e474ae25632a91e049ea9463f9034a5);
+            
+        
+
+        marker_5e3a97ff809b53f63d09a0998d45e70d.bindPopup(popup_f6ea4a0cd22d392861f95d812a413268)
+        ;
+
+        
+    
+    
+                marker_5e3a97ff809b53f63d09a0998d45e70d.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_bca03eb1c55a77d7519a5f68786c9c94 = L.marker(
+                [48.855398, 2.280805],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_c4a7fa9b4986a2b0927961e3f917620c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8e856045e2733045cdefc3dcfd8eb233 = $(`<div id="html_8e856045e2733045cdefc3dcfd8eb233" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">maison de Balzac</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8554</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2808</p>     </div>     </div>`)[0];
+                popup_c4a7fa9b4986a2b0927961e3f917620c.setContent(html_8e856045e2733045cdefc3dcfd8eb233);
+            
+        
+
+        marker_bca03eb1c55a77d7519a5f68786c9c94.bindPopup(popup_c4a7fa9b4986a2b0927961e3f917620c)
+        ;
+
+        
+    
+    
+                marker_bca03eb1c55a77d7519a5f68786c9c94.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_deb54907619dd00c90ffc462063f914a = L.marker(
+                [48.854808, 2.366232],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_916bf07be98b0cb382defd90a156c420 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_349d6f3d326b474036dadc842a04fc58 = $(`<div id="html_349d6f3d326b474036dadc842a04fc58" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">maison de Victor Hugo</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8548</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3662</p>     </div>     </div>`)[0];
+                popup_916bf07be98b0cb382defd90a156c420.setContent(html_349d6f3d326b474036dadc842a04fc58);
+            
+        
+
+        marker_deb54907619dd00c90ffc462063f914a.bindPopup(popup_916bf07be98b0cb382defd90a156c420)
+        ;
+
+        
+    
+    
+                marker_deb54907619dd00c90ffc462063f914a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_ebccae48ec96a9d91ca8ebbc6c3dad09 = L.marker(
+                [48.843017, 2.31883],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_2f10e5e9eab30c9a1175945f78a6b92d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ed5f78c23aa3cbc370c02481bd4b6950 = $(`<div id="html_ed5f78c23aa3cbc370c02481bd4b6950" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Bourdelle</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8430</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3188</p>     </div>     </div>`)[0];
+                popup_2f10e5e9eab30c9a1175945f78a6b92d.setContent(html_ed5f78c23aa3cbc370c02481bd4b6950);
+            
+        
+
+        marker_ebccae48ec96a9d91ca8ebbc6c3dad09.bindPopup(popup_2f10e5e9eab30c9a1175945f78a6b92d)
+        ;
+
+        
+    
+    
+                marker_ebccae48ec96a9d91ca8ebbc6c3dad09.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_357c88646877a191fd8717c3d73ca1ec = L.marker(
+                [48.85699, 2.362856],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_7fb8d1ffe000907d2a0f4cdb321e88cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fe79e271a838fe6f08d15af7b8423300 = $(`<div id="html_fe79e271a838fe6f08d15af7b8423300" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Carnavalet - histoire de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8570</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3629</p>     </div>     </div>`)[0];
+                popup_7fb8d1ffe000907d2a0f4cdb321e88cc.setContent(html_fe79e271a838fe6f08d15af7b8423300);
+            
+        
+
+        marker_357c88646877a191fd8717c3d73ca1ec.bindPopup(popup_7fb8d1ffe000907d2a0f4cdb321e88cc)
+        ;
+
+        
+    
+    
+                marker_357c88646877a191fd8717c3d73ca1ec.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_9f4711978bfb6e969dc72e20fe7c4bad = L.marker(
+                [48.879693, 2.312194],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_b623ccdad783dd809044a5d22c573b57 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3358e8cbf804b193a463b07bb1a99854 = $(`<div id="html_3358e8cbf804b193a463b07bb1a99854" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Cernuschi, musée des arts de l'Asie de la ville de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8797</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3122</p>     </div>     </div>`)[0];
+                popup_b623ccdad783dd809044a5d22c573b57.setContent(html_3358e8cbf804b193a463b07bb1a99854);
+            
+        
+
+        marker_9f4711978bfb6e969dc72e20fe7c4bad.bindPopup(popup_b623ccdad783dd809044a5d22c573b57)
+        ;
+
+        
+    
+    
+                marker_9f4711978bfb6e969dc72e20fe7c4bad.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_4f801e5eeb227d3ed8efadf09de0606a = L.marker(
+                [48.858257, 2.361524],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_89ef16a88597de44c3edd8f66ee0a9c5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3055e1f03d6c318f6bf8108ef62d38a0 = $(`<div id="html_3055e1f03d6c318f6bf8108ef62d38a0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Cognacq-Jay, musée du XVIIIe siècle de la ville de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8583</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3615</p>     </div>     </div>`)[0];
+                popup_89ef16a88597de44c3edd8f66ee0a9c5.setContent(html_3055e1f03d6c318f6bf8108ef62d38a0);
+            
+        
+
+        marker_4f801e5eeb227d3ed8efadf09de0606a.bindPopup(popup_89ef16a88597de44c3edd8f66ee0a9c5)
+        ;
+
+        
+    
+    
+                marker_4f801e5eeb227d3ed8efadf09de0606a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_85896b102e330fedeac46051bd870076 = L.marker(
+                [48.854434, 2.335679],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_0b901ba7e94f1438425ca1fe2fb6203e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_aa221dff315d38bd019e96227782bb0d = $(`<div id="html_aa221dff315d38bd019e96227782bb0d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Eugène Delacroix</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8544</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3357</p>     </div>     </div>`)[0];
+                popup_0b901ba7e94f1438425ca1fe2fb6203e.setContent(html_aa221dff315d38bd019e96227782bb0d);
+            
+        
+
+        marker_85896b102e330fedeac46051bd870076.bindPopup(popup_0b901ba7e94f1438425ca1fe2fb6203e)
+        ;
+
+        
+    
+    
+                marker_85896b102e330fedeac46051bd870076.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_a08358a1ee7a126e3ff1010140362a0b = L.marker(
+                [48.877878, 2.334383],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_c44749efaa92238be858fa6576ebf298 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b04c345a55bdb522d8b0fe7bef2b658 = $(`<div id="html_0b04c345a55bdb522d8b0fe7bef2b658" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Gustave Moreau</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8779</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3344</p>     </div>     </div>`)[0];
+                popup_c44749efaa92238be858fa6576ebf298.setContent(html_0b04c345a55bdb522d8b0fe7bef2b658);
+            
+        
+
+        marker_a08358a1ee7a126e3ff1010140362a0b.bindPopup(popup_c44749efaa92238be858fa6576ebf298)
+        ;
+
+        
+    
+    
+                marker_a08358a1ee7a126e3ff1010140362a0b.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_8171b38eea20ab2e243a2f4e4503d91b = L.marker(
+                [48.847429, 2.322709],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_48c4d35fee6a7b57fe2f574f50bc2a48 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6d313a83a04e18d494bca9d72d7baf54 = $(`<div id="html_6d313a83a04e18d494bca9d72d7baf54" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Hébert</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8474</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3227</p>     </div>     </div>`)[0];
+                popup_48c4d35fee6a7b57fe2f574f50bc2a48.setContent(html_6d313a83a04e18d494bca9d72d7baf54);
+            
+        
+
+        marker_8171b38eea20ab2e243a2f4e4503d91b.bindPopup(popup_48c4d35fee6a7b57fe2f574f50bc2a48)
+        ;
+
+        
+    
+    
+                marker_8171b38eea20ab2e243a2f4e4503d91b.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_d49703e818f36c0eb480b0aca34632f9 = L.marker(
+                [48.883045, 2.307689],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_47222e421601509f5f0b530bbd49cff3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_88895e15e25dcee589d02679663666d2 = $(`<div id="html_88895e15e25dcee589d02679663666d2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Jean-Jacques Henner</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8830</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3077</p>     </div>     </div>`)[0];
+                popup_47222e421601509f5f0b530bbd49cff3.setContent(html_88895e15e25dcee589d02679663666d2);
+            
+        
+
+        marker_d49703e818f36c0eb480b0aca34632f9.bindPopup(popup_47222e421601509f5f0b530bbd49cff3)
+        ;
+
+        
+    
+    
+                marker_d49703e818f36c0eb480b0aca34632f9.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_837c24daf7adbcb2f5818f882dccde21 = L.marker(
+                [48.878849, 2.312855],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_784d2d838e65986f3741eb0b054662a4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_14e561b362da8be0d28f4fa1e6fd01e3 = $(`<div id="html_14e561b362da8be0d28f4fa1e6fd01e3" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Nissim de Camondo (Union centrale des arts décoratifs)</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8788</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3129</p>     </div>     </div>`)[0];
+                popup_784d2d838e65986f3741eb0b054662a4.setContent(html_14e561b362da8be0d28f4fa1e6fd01e3);
+            
+        
+
+        marker_837c24daf7adbcb2f5818f882dccde21.bindPopup(popup_784d2d838e65986f3741eb0b054662a4)
+        ;
+
+        
+    
+    
+                marker_837c24daf7adbcb2f5818f882dccde21.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_d726ef2810cb5c1790a19f5c105f60c7 = L.marker(
+                [48.8597, 2.362644],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_81b3d9d47e218b5eeccdd3b2dfe8cb3f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_24de8f9cc14026308aeca2c59d61b426 = $(`<div id="html_24de8f9cc14026308aeca2c59d61b426" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Picasso</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8597</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3626</p>     </div>     </div>`)[0];
+                popup_81b3d9d47e218b5eeccdd3b2dfe8cb3f.setContent(html_24de8f9cc14026308aeca2c59d61b426);
+            
+        
+
+        marker_d726ef2810cb5c1790a19f5c105f60c7.bindPopup(popup_81b3d9d47e218b5eeccdd3b2dfe8cb3f)
+        ;
+
+        
+    
+    
+                marker_d726ef2810cb5c1790a19f5c105f60c7.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_924560f913d4bd217bfd80742e917bd7 = L.marker(
+                [48.855868, 2.31598],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_19bf74e675883306e2d56059e5de29d7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_372e092e7147bb2ca63dda2d13d81e96 = $(`<div id="html_372e092e7147bb2ca63dda2d13d81e96" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Rodin</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8559</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3160</p>     </div>     </div>`)[0];
+                popup_19bf74e675883306e2d56059e5de29d7.setContent(html_372e092e7147bb2ca63dda2d13d81e96);
+            
+        
+
+        marker_924560f913d4bd217bfd80742e917bd7.bindPopup(popup_19bf74e675883306e2d56059e5de29d7)
+        ;
+
+        
+    
+    
+                marker_924560f913d4bd217bfd80742e917bd7.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_b507fd93f878fc95d52a5c2c44c9b14a = L.marker(
+                [48.873694, 2.280339],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_5c6161de8206879f76ebd7a47c39cf77 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e17e07e4a1cb3f8f8b8434b83aac6da = $(`<div id="html_4e17e07e4a1cb3f8f8b8434b83aac6da" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Yves Saint Laurent Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8737</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2803</p>     </div>     </div>`)[0];
+                popup_5c6161de8206879f76ebd7a47c39cf77.setContent(html_4e17e07e4a1cb3f8f8b8434b83aac6da);
+            
+        
+
+        marker_b507fd93f878fc95d52a5c2c44c9b14a.bindPopup(popup_5c6161de8206879f76ebd7a47c39cf77)
+        ;
+
+        
+    
+    
+                marker_b507fd93f878fc95d52a5c2c44c9b14a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_7d619448df627d0f964bd58065d2a2e1 = L.marker(
+                [48.842793, 2.333457],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_846da6b0b1932bb15df60667b82cf60a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9be29cc53efad729fd585494c56fcd39 = $(`<div id="html_9be29cc53efad729fd585494c56fcd39" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée Zadkine</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8428</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3335</p>     </div>     </div>`)[0];
+                popup_846da6b0b1932bb15df60667b82cf60a.setContent(html_9be29cc53efad729fd585494c56fcd39);
+            
+        
+
+        marker_7d619448df627d0f964bd58065d2a2e1.bindPopup(popup_846da6b0b1932bb15df60667b82cf60a)
+        ;
+
+        
+    
+    
+                marker_7d619448df627d0f964bd58065d2a2e1.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_176cd7c44060bbd509ab3127085609e5 = L.marker(
+                [48.871845, 2.281997],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_3d11c90a2229401d5e128c387ec69ff2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_08f1549387a55aa2e6b6fae1a90d0bd9 = $(`<div id="html_08f1549387a55aa2e6b6fae1a90d0bd9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée d'Ennery</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8718</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2820</p>     </div>     </div>`)[0];
+                popup_3d11c90a2229401d5e128c387ec69ff2.setContent(html_08f1549387a55aa2e6b6fae1a90d0bd9);
+            
+        
+
+        marker_176cd7c44060bbd509ab3127085609e5.bindPopup(popup_3d11c90a2229401d5e128c387ec69ff2)
+        ;
+
+        
+    
+    
+                marker_176cd7c44060bbd509ab3127085609e5.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_987f7d543f72a182cef469a68c9ac5bb = L.marker(
+                [48.859157, 2.323672],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_04e30c02e098d373524adfbc1d32a2e2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_446feec38da53157ed4bca589743dfd1 = $(`<div id="html_446feec38da53157ed4bca589743dfd1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée d'Orsay</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8592</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3237</p>     </div>     </div>`)[0];
+                popup_04e30c02e098d373524adfbc1d32a2e2.setContent(html_446feec38da53157ed4bca589743dfd1);
+            
+        
+
+        marker_987f7d543f72a182cef469a68c9ac5bb.bindPopup(popup_04e30c02e098d373524adfbc1d32a2e2)
+        ;
+
+        
+    
+    
+                marker_987f7d543f72a182cef469a68c9ac5bb.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_30b3e48d505ab42b35158c0e107c9035 = L.marker(
+                [48.830264, 2.340376],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_67351d3c067fd8494bd12ad9a4a073c5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6e3a8c6a8f10ecb2018bc923cf01b38c = $(`<div id="html_6e3a8c6a8f10ecb2018bc923cf01b38c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée d'art et d'histoire de l'hôpital Sainte-Anne</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8303</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3404</p>     </div>     </div>`)[0];
+                popup_67351d3c067fd8494bd12ad9a4a073c5.setContent(html_6e3a8c6a8f10ecb2018bc923cf01b38c);
+            
+        
+
+        marker_30b3e48d505ab42b35158c0e107c9035.bindPopup(popup_67351d3c067fd8494bd12ad9a4a073c5)
+        ;
+
+        
+    
+    
+                marker_30b3e48d505ab42b35158c0e107c9035.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_4b2a37a00bc823ddd5d83e64b23bbe78 = L.marker(
+                [48.86095, 2.355608],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_3f2ba51c9a33384dd28822db56c0a2b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_18a2357793712eeb9d8e0f82b19f6b4f = $(`<div id="html_18a2357793712eeb9d8e0f82b19f6b4f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée d'art et d'histoire du judaïsme</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8610</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3556</p>     </div>     </div>`)[0];
+                popup_3f2ba51c9a33384dd28822db56c0a2b8.setContent(html_18a2357793712eeb9d8e0f82b19f6b4f);
+            
+        
+
+        marker_4b2a37a00bc823ddd5d83e64b23bbe78.bindPopup(popup_3f2ba51c9a33384dd28822db56c0a2b8)
+        ;
+
+        
+    
+    
+                marker_4b2a37a00bc823ddd5d83e64b23bbe78.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_8d4b3385c9686e4f14c944b84375d1a8 = L.marker(
+                [48.864603220958784, 2.29843234195393],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_161321742b02c7967452ebff485028b6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bfc790be027eb0cac8c19a0d2aa95813 = $(`<div id="html_bfc790be027eb0cac8c19a0d2aa95813" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée d'art moderne de la ville de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8646</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2984</p>     </div>     </div>`)[0];
+                popup_161321742b02c7967452ebff485028b6.setContent(html_bfc790be027eb0cac8c19a0d2aa95813);
+            
+        
+
+        marker_8d4b3385c9686e4f14c944b84375d1a8.bindPopup(popup_161321742b02c7967452ebff485028b6)
+        ;
+
+        
+    
+    
+                marker_8d4b3385c9686e4f14c944b84375d1a8.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_b087f152e7759d956ac2466bc90650ac = L.marker(
+                [48.887709, 2.340577],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_fe45c41cd5e2befc73defe53dfc26535 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_854322b06892222f7625e209095b545c = $(`<div id="html_854322b06892222f7625e209095b545c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de Montmartre</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8877</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3406</p>     </div>     </div>`)[0];
+                popup_fe45c41cd5e2befc73defe53dfc26535.setContent(html_854322b06892222f7625e209095b545c);
+            
+        
+
+        marker_b087f152e7759d956ac2466bc90650ac.bindPopup(popup_fe45c41cd5e2befc73defe53dfc26535)
+        ;
+
+        
+    
+    
+                marker_b087f152e7759d956ac2466bc90650ac.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_e1a7557a4b6d69971149720b0d051984 = L.marker(
+                [48.845748, 2.33167],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_805ab8c9a30d295fddd6d01b4dae4d80 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d3c2355566d94ab6b45a192735c326ce = $(`<div id="html_d3c2355566d94ab6b45a192735c326ce" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de l'Ecole nationale supérieure des beaux-arts</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8457</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3317</p>     </div>     </div>`)[0];
+                popup_805ab8c9a30d295fddd6d01b4dae4d80.setContent(html_d3c2355566d94ab6b45a192735c326ce);
+            
+        
+
+        marker_e1a7557a4b6d69971149720b0d051984.bindPopup(popup_805ab8c9a30d295fddd6d01b4dae4d80)
+        ;
+
+        
+    
+    
+                marker_e1a7557a4b6d69971149720b0d051984.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_6ce09cd60e57ec642246b862f59fabfc = L.marker(
+                [48.843955, 2.352176],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_0ffbb23e114fe601976b44f81559bca7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_efcb6b78113c5dde99ab094ff2d19b56 = $(`<div id="html_efcb6b78113c5dde99ab094ff2d19b56" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de l'Institut du monde arabe</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8440</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3522</p>     </div>     </div>`)[0];
+                popup_0ffbb23e114fe601976b44f81559bca7.setContent(html_efcb6b78113c5dde99ab094ff2d19b56);
+            
+        
+
+        marker_6ce09cd60e57ec642246b862f59fabfc.bindPopup(popup_0ffbb23e114fe601976b44f81559bca7)
+        ;
+
+        
+    
+    
+                marker_6ce09cd60e57ec642246b862f59fabfc.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_bf2c7e3b04a4faadac91dfd0fef6109c = L.marker(
+                [48.868053, 2.326622],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_aafbd000b6698cfa34e5d049649a18f9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_666364f0e4b980db94381dbcee226fa8 = $(`<div id="html_666364f0e4b980db94381dbcee226fa8" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de l'Orangerie des Tuileries</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8681</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3266</p>     </div>     </div>`)[0];
+                popup_aafbd000b6698cfa34e5d049649a18f9.setContent(html_666364f0e4b980db94381dbcee226fa8);
+            
+        
+
+        marker_bf2c7e3b04a4faadac91dfd0fef6109c.bindPopup(popup_aafbd000b6698cfa34e5d049649a18f9)
+        ;
+
+        
+    
+    
+                marker_bf2c7e3b04a4faadac91dfd0fef6109c.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_496feb33716be48c065ef6c145c209d3 = L.marker(
+                [48.858219, 2.312885],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_af019e4a37b2c7b275d885f960475b1a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_04b4b8f1db50636cbe83346b125d4c89 = $(`<div id="html_04b4b8f1db50636cbe83346b125d4c89" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de l'armée</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8582</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3129</p>     </div>     </div>`)[0];
+                popup_af019e4a37b2c7b275d885f960475b1a.setContent(html_04b4b8f1db50636cbe83346b125d4c89);
+            
+        
+
+        marker_496feb33716be48c065ef6c145c209d3.bindPopup(popup_af019e4a37b2c7b275d885f960475b1a)
+        ;
+
+        
+    
+    
+                marker_496feb33716be48c065ef6c145c209d3.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_b744f6de4131bd8e8aeb9c52d093294a = L.marker(
+                [48.838805, 2.356007],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_f735c0e69da62c99f2165e21b934bb75 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_911caf30a64c087ded51baadfc51bf88 = $(`<div id="html_911caf30a64c087ded51baadfc51bf88" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de l'assistance publique - hôpitaux de Paris</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8388</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3560</p>     </div>     </div>`)[0];
+                popup_f735c0e69da62c99f2165e21b934bb75.setContent(html_911caf30a64c087ded51baadfc51bf88);
+            
+        
+
+        marker_b744f6de4131bd8e8aeb9c52d093294a.bindPopup(popup_f735c0e69da62c99f2165e21b934bb75)
+        ;
+
+        
+    
+    
+                marker_b744f6de4131bd8e8aeb9c52d093294a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_da3392673a6884da0f2fcf585b7a925c = L.marker(
+                [48.8835, 2.32192],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_e74d09db500f8a72d363e0792499f821 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b1f83ab2aa01b4449bd147b02101cc53 = $(`<div id="html_b1f83ab2aa01b4449bd147b02101cc53" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la Grande Loge de France</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8835</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3219</p>     </div>     </div>`)[0];
+                popup_e74d09db500f8a72d363e0792499f821.setContent(html_b1f83ab2aa01b4449bd147b02101cc53);
+            
+        
+
+        marker_da3392673a6884da0f2fcf585b7a925c.bindPopup(popup_e74d09db500f8a72d363e0792499f821)
+        ;
+
+        
+    
+    
+                marker_da3392673a6884da0f2fcf585b7a925c.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_45819e5df4a8b166eb3659f61e32d6a1 = L.marker(
+                [48.840614, 2.319773],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_c81eb1bf1e92b46b829f384397da78bc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_733bb0f64508cdfd731f75f410b1d108 = $(`<div id="html_733bb0f64508cdfd731f75f410b1d108" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la Libération de Paris - musée du général Leclerc - musée Jean Moulin</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8406</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3198</p>     </div>     </div>`)[0];
+                popup_c81eb1bf1e92b46b829f384397da78bc.setContent(html_733bb0f64508cdfd731f75f410b1d108);
+            
+        
+
+        marker_45819e5df4a8b166eb3659f61e32d6a1.bindPopup(popup_c81eb1bf1e92b46b829f384397da78bc)
+        ;
+
+        
+    
+    
+                marker_45819e5df4a8b166eb3659f61e32d6a1.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_2aeb61f4ce20deb9294f245a2378e70a = L.marker(
+                [48.861491, 2.358608],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_a59b961aba11b2f3fb79c8986f6a6fac = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f04f034c6e398692fa8f8082c5b78a7b = $(`<div id="html_f04f034c6e398692fa8f8082c5b78a7b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la chasse et de la nature</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8615</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3586</p>     </div>     </div>`)[0];
+                popup_a59b961aba11b2f3fb79c8986f6a6fac.setContent(html_f04f034c6e398692fa8f8082c5b78a7b);
+            
+        
+
+        marker_2aeb61f4ce20deb9294f245a2378e70a.bindPopup(popup_a59b961aba11b2f3fb79c8986f6a6fac)
+        ;
+
+        
+    
+    
+                marker_2aeb61f4ce20deb9294f245a2378e70a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_a41de6c14a01a4cfe433b3c1de9f0d3a = L.marker(
+                [48.874991, 2.343088],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_b0d21dbdb6d8a0e46ab46b517057c729 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d70599b8f6473fb39a2dcadb52b39d6 = $(`<div id="html_7d70599b8f6473fb39a2dcadb52b39d6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la franc-maçonnerie</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8750</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3431</p>     </div>     </div>`)[0];
+                popup_b0d21dbdb6d8a0e46ab46b517057c729.setContent(html_7d70599b8f6473fb39a2dcadb52b39d6);
+            
+        
+
+        marker_a41de6c14a01a4cfe433b3c1de9f0d3a.bindPopup(popup_b0d21dbdb6d8a0e46ab46b517057c729)
+        ;
+
+        
+    
+    
+                marker_a41de6c14a01a4cfe433b3c1de9f0d3a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_346b5991d9d79a50df2b5e8cbb47a733 = L.marker(
+                [48.889306, 2.393807],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_aef92c36ecaba54af184beaf5bbb673b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ddf9f1943044b8361440a25bf36a1704 = $(`<div id="html_ddf9f1943044b8361440a25bf36a1704" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la musique</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8893</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3938</p>     </div>     </div>`)[0];
+                popup_aef92c36ecaba54af184beaf5bbb673b.setContent(html_ddf9f1943044b8361440a25bf36a1704);
+            
+        
+
+        marker_346b5991d9d79a50df2b5e8cbb47a733.bindPopup(popup_aef92c36ecaba54af184beaf5bbb673b)
+        ;
+
+        
+    
+    
+                marker_346b5991d9d79a50df2b5e8cbb47a733.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_95d38bb5820212c6f09d15a03950d039 = L.marker(
+                [48.84156094062689, 2.3177008959224517],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_51ec020ab31153ef2db57f0258cbf3b0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_07d82ff710f44762d6b96d3c6b67cb77 = $(`<div id="html_07d82ff710f44762d6b96d3c6b67cb77" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la poste</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8416</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3177</p>     </div>     </div>`)[0];
+                popup_51ec020ab31153ef2db57f0258cbf3b0.setContent(html_07d82ff710f44762d6b96d3c6b67cb77);
+            
+        
+
+        marker_95d38bb5820212c6f09d15a03950d039.bindPopup(popup_51ec020ab31153ef2db57f0258cbf3b0)
+        ;
+
+        
+    
+    
+                marker_95d38bb5820212c6f09d15a03950d039.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_f47964a07421521b088b1985e03a3f72 = L.marker(
+                [48.880899, 2.333278],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_d38b47b9655ccd2e8af6c27c4a94505b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ce7c05b36bdaf36ddda6656b202b1ca5 = $(`<div id="html_ce7c05b36bdaf36ddda6656b202b1ca5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée de la vie romantique</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8809</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3333</p>     </div>     </div>`)[0];
+                popup_d38b47b9655ccd2e8af6c27c4a94505b.setContent(html_ce7c05b36bdaf36ddda6656b202b1ca5);
+            
+        
+
+        marker_f47964a07421521b088b1985e03a3f72.bindPopup(popup_d38b47b9655ccd2e8af6c27c4a94505b)
+        ;
+
+        
+    
+    
+                marker_f47964a07421521b088b1985e03a3f72.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_db0f118f2dac64a7a644d7da072c6de2 = L.marker(
+                [48.858219, 2.312885],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_1ecc5f998c0d7ea8fafee15b6dde94dc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f82b9e93746b0c3ea06cb32085f10e53 = $(`<div id="html_f82b9e93746b0c3ea06cb32085f10e53" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des Plans-reliefs</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8582</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3129</p>     </div>     </div>`)[0];
+                popup_1ecc5f998c0d7ea8fafee15b6dde94dc.setContent(html_f82b9e93746b0c3ea06cb32085f10e53);
+            
+        
+
+        marker_db0f118f2dac64a7a644d7da072c6de2.bindPopup(popup_1ecc5f998c0d7ea8fafee15b6dde94dc)
+        ;
+
+        
+    
+    
+                marker_db0f118f2dac64a7a644d7da072c6de2.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_ede5776d6934028f9dc04864e6c19347 = L.marker(
+                [48.86425, 2.293754],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_049f786aacafee3e2e2e14a6f585dbbc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d5e0768de3dbb272fb3408e31e7d708b = $(`<div id="html_d5e0768de3dbb272fb3408e31e7d708b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des arts asiatiques Guimet</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8642</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2938</p>     </div>     </div>`)[0];
+                popup_049f786aacafee3e2e2e14a6f585dbbc.setContent(html_d5e0768de3dbb272fb3408e31e7d708b);
+            
+        
+
+        marker_ede5776d6934028f9dc04864e6c19347.bindPopup(popup_049f786aacafee3e2e2e14a6f585dbbc)
+        ;
+
+        
+    
+    
+                marker_ede5776d6934028f9dc04864e6c19347.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_1c92beae04ee7bfca1467bd1931b6b1a = L.marker(
+                [48.863218, 2.3333],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_f319c173f2e505075c1fe4b08da77af3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_efe2ef3b7e7447553384ce1a96bed455 = $(`<div id="html_efe2ef3b7e7447553384ce1a96bed455" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des arts décoratifs (Union centrale des arts décoratifs)</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8632</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3333</p>     </div>     </div>`)[0];
+                popup_f319c173f2e505075c1fe4b08da77af3.setContent(html_efe2ef3b7e7447553384ce1a96bed455);
+            
+        
+
+        marker_1c92beae04ee7bfca1467bd1931b6b1a.bindPopup(popup_f319c173f2e505075c1fe4b08da77af3)
+        ;
+
+        
+    
+    
+                marker_1c92beae04ee7bfca1467bd1931b6b1a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_b4f003b88cbd312806e4f1a0e4ff6293 = L.marker(
+                [48.865357, 2.357046],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_8c419252d8da4796abc0cbf9512e5e16 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_89c4c578212a2d593089ce2a5e2f8c60 = $(`<div id="html_89c4c578212a2d593089ce2a5e2f8c60" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des arts et métiers</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8654</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3570</p>     </div>     </div>`)[0];
+                popup_8c419252d8da4796abc0cbf9512e5e16.setContent(html_89c4c578212a2d593089ce2a5e2f8c60);
+            
+        
+
+        marker_b4f003b88cbd312806e4f1a0e4ff6293.bindPopup(popup_8c419252d8da4796abc0cbf9512e5e16)
+        ;
+
+        
+    
+    
+                marker_b4f003b88cbd312806e4f1a0e4ff6293.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_a5bc2a05dd65d7b7a26252e36a95ea6c = L.marker(
+                [48.857003, 2.338699],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_ea77319f4ef5f079f67f0c2887a45fb9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_da7cbe21af3079690b3249b228950e22 = $(`<div id="html_da7cbe21af3079690b3249b228950e22" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des monnaies et médailles</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8570</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3387</p>     </div>     </div>`)[0];
+                popup_ea77319f4ef5f079f67f0c2887a45fb9.setContent(html_da7cbe21af3079690b3249b228950e22);
+            
+        
+
+        marker_a5bc2a05dd65d7b7a26252e36a95ea6c.bindPopup(popup_ea77319f4ef5f079f67f0c2887a45fb9)
+        ;
+
+        
+    
+    
+                marker_a5bc2a05dd65d7b7a26252e36a95ea6c.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_709a892f9945f074e43c5a15177b3523 = L.marker(
+                [48.862323, 2.281879],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_5ad41838bd9f92878bf3585c8d0d8a72 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b982e6ea84115aeb939be571750bad52 = $(`<div id="html_b982e6ea84115aeb939be571750bad52" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée des monuments français</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8623</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2819</p>     </div>     </div>`)[0];
+                popup_5ad41838bd9f92878bf3585c8d0d8a72.setContent(html_b982e6ea84115aeb939be571750bad52);
+            
+        
+
+        marker_709a892f9945f074e43c5a15177b3523.bindPopup(popup_5ad41838bd9f92878bf3585c8d0d8a72)
+        ;
+
+        
+    
+    
+                marker_709a892f9945f074e43c5a15177b3523.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_a475121f6e65fcaefc75869601485ae7 = L.marker(
+                [48.86079459806906, 2.3378156596817785],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_a7fc332a464dbb0c2c1b7753c65ca404 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fe92003aa5b2fa589aa3fb45c2e3f504 = $(`<div id="html_fe92003aa5b2fa589aa3fb45c2e3f504" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée du Louvre</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8608</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3378</p>     </div>     </div>`)[0];
+                popup_a7fc332a464dbb0c2c1b7753c65ca404.setContent(html_fe92003aa5b2fa589aa3fb45c2e3f504);
+            
+        
+
+        marker_a475121f6e65fcaefc75869601485ae7.bindPopup(popup_a7fc332a464dbb0c2c1b7753c65ca404)
+        ;
+
+        
+    
+    
+                marker_a475121f6e65fcaefc75869601485ae7.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_fc801cd57e863f44ea4720c54439a13a = L.marker(
+                [48.850437, 2.344553],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_667b1355f52bf0bd1aab15a35ddcaf01 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a8871211fa0a4c39cb1872c3427ba74 = $(`<div id="html_8a8871211fa0a4c39cb1872c3427ba74" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée du Moyen Âge - thermes et hôtel de Cluny</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8504</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3446</p>     </div>     </div>`)[0];
+                popup_667b1355f52bf0bd1aab15a35ddcaf01.setContent(html_8a8871211fa0a4c39cb1872c3427ba74);
+            
+        
+
+        marker_fc801cd57e863f44ea4720c54439a13a.bindPopup(popup_667b1355f52bf0bd1aab15a35ddcaf01)
+        ;
+
+        
+    
+    
+                marker_fc801cd57e863f44ea4720c54439a13a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_810b16fc21b01d4e5800eb4726620675 = L.marker(
+                [48.861511, 2.29771],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_d8850e881311e778f54f409cc260a620 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7e597fddb9bc8654ae6992c56e99040c = $(`<div id="html_7e597fddb9bc8654ae6992c56e99040c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée du Quai Branly - Jacques Chirac</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8615</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2977</p>     </div>     </div>`)[0];
+                popup_d8850e881311e778f54f409cc260a620.setContent(html_7e597fddb9bc8654ae6992c56e99040c);
+            
+        
+
+        marker_810b16fc21b01d4e5800eb4726620675.bindPopup(popup_d8850e881311e778f54f409cc260a620)
+        ;
+
+        
+    
+    
+                marker_810b16fc21b01d4e5800eb4726620675.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_c4cbe4d538222f3b44676cf8519a7f49 = L.marker(
+                [48.840814, 2.341091],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_87f12d55886ae1e6dc22f17545b6a66e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_120bac52a09431d9c2ac097cc76c412f = $(`<div id="html_120bac52a09431d9c2ac097cc76c412f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée du service de santé des armées du Val-de-Grâce</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8408</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3411</p>     </div>     </div>`)[0];
+                popup_87f12d55886ae1e6dc22f17545b6a66e.setContent(html_120bac52a09431d9c2ac097cc76c412f);
+            
+        
+
+        marker_c4cbe4d538222f3b44676cf8519a7f49.bindPopup(popup_87f12d55886ae1e6dc22f17545b6a66e)
+        ;
+
+        
+    
+    
+                marker_c4cbe4d538222f3b44676cf8519a7f49.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_8ee3215e60b1d1b4570f5b7665e407e5 = L.marker(
+                [48.86080432275963, 2.3522235406355176],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_cc24f2908890cb91d77159f79defa70e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e59b2b40a5548ecc81477a7a8fee84b7 = $(`<div id="html_e59b2b40a5548ecc81477a7a8fee84b7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée national d'art moderne (centre national d'art et de culture Georges Pompidou)</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8608</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3522</p>     </div>     </div>`)[0];
+                popup_cc24f2908890cb91d77159f79defa70e.setContent(html_e59b2b40a5548ecc81477a7a8fee84b7);
+            
+        
+
+        marker_8ee3215e60b1d1b4570f5b7665e407e5.bindPopup(popup_cc24f2908890cb91d77159f79defa70e)
+        ;
+
+        
+    
+    
+                marker_8ee3215e60b1d1b4570f5b7665e407e5.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_52502df5463b68ff2af5949b1106136f = L.marker(
+                [48.836753, 2.390394],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_11340362d6c26f36b750acd14d391d5d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_42a20eaed6f9e61afc490c1741868b84 = $(`<div id="html_42a20eaed6f9e61afc490c1741868b84" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée national de l'histoire et des cultures de l'immigration</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8368</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3904</p>     </div>     </div>`)[0];
+                popup_11340362d6c26f36b750acd14d391d5d.setContent(html_42a20eaed6f9e61afc490c1741868b84);
+            
+        
+
+        marker_52502df5463b68ff2af5949b1106136f.bindPopup(popup_11340362d6c26f36b750acd14d391d5d)
+        ;
+
+        
+    
+    
+                marker_52502df5463b68ff2af5949b1106136f.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_9d046f367a3f9ac9ba264b5b9bfee51b = L.marker(
+                [48.860294, 2.324768],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_657abc0efca644454ad0db9e7ead08a3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d2cde3a648a0b58c2cab8e61185d4c4 = $(`<div id="html_7d2cde3a648a0b58c2cab8e61185d4c4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée national de la Légion d'honneur et des ordres de chevalerie</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8603</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3248</p>     </div>     </div>`)[0];
+                popup_657abc0efca644454ad0db9e7ead08a3.setContent(html_7d2cde3a648a0b58c2cab8e61185d4c4);
+            
+        
+
+        marker_9d046f367a3f9ac9ba264b5b9bfee51b.bindPopup(popup_657abc0efca644454ad0db9e7ead08a3)
+        ;
+
+        
+    
+    
+                marker_9d046f367a3f9ac9ba264b5b9bfee51b.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_fc685f09a6139e75cf28ffb2d112cfcc = L.marker(
+                [48.86425, 2.293754],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_1518b9a1def43db05b2c58d18d38e087 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_07df9827afe0f03d6f2a38ce4647f208 = $(`<div id="html_07df9827afe0f03d6f2a38ce4647f208" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">musée national de la marine</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8642</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.2938</p>     </div>     </div>`)[0];
+                popup_1518b9a1def43db05b2c58d18d38e087.setContent(html_07df9827afe0f03d6f2a38ce4647f208);
+            
+        
+
+        marker_fc685f09a6139e75cf28ffb2d112cfcc.bindPopup(popup_1518b9a1def43db05b2c58d18d38e087)
+        ;
+
+        
+    
+    
+                marker_fc685f09a6139e75cf28ffb2d112cfcc.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            var marker_73e79f5d5d8784804db33f3f6c4b152a = L.marker(
+                [48.842168, 2.359933],
+                {
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+    
+        var popup_052aca669397a11ac780e96ce9b8e7b2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f2863195d8184c2950407aefe7418af = $(`<div id="html_7f2863195d8184c2950407aefe7418af" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Georgia, serif; font-size: 12px; max-width: 250px;">         <h4 style="color: #8B4513; margin: 0 0 5px 0;">muséum national d'histoire naturelle</h4>         <p style="margin: 2px 0;"><b>Latitude:</b> 48.8422</p>         <p style="margin: 2px 0;"><b>Longitude:</b> 2.3599</p>     </div>     </div>`)[0];
+                popup_052aca669397a11ac780e96ce9b8e7b2.setContent(html_7f2863195d8184c2950407aefe7418af);
+            
+        
+
+        marker_73e79f5d5d8784804db33f3f6c4b152a.bindPopup(popup_052aca669397a11ac780e96ce9b8e7b2)
+        ;
+
+        
+    
+    
+                marker_73e79f5d5d8784804db33f3f6c4b152a.setIcon(icon_e208bbe388967341c98822c7e7db061e);
+            
+    
+            L.control.fullscreen(
+                {
+  "position": "topright",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_89e83e00015e30fe7ae93d1efa58ef3b);
+        
+</script>
+</html>

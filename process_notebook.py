@@ -8,7 +8,7 @@ from pathlib import Path
 
 # --- Configuration ---
 FINAL_OBJECT_VARIABLE_NAME = "dataviz"
-ROOT_NOTEBOOK_FOLDER = Path(".")
+ROOT_NOTEBOOK_FOLDER = Path("./notebooks")
 PUBLISHED_NOTEBOOK_FOLDER = Path("./published/notebooks")
 
 def capture_html_screenshot(html_path, output_png_path):
@@ -194,20 +194,33 @@ try:
             final_object.write_image(OUTPUT_IMAGE_NAME, scale=3, width=1200, height=800)
             print(f"--> Image Plotly sauvegardée avec succès.")
         except Exception as e:
-            print(f"AVERTISSESEMENT: La sauvegarde directe en PNG a échoué (kaleido est-il installé?). L'image statique ne sera pas générée.", file=sys.stderr)
+            print(f"AVERTISSEMENT: La sauvegarde directe en PNG a échoué (kaleido est-il installé?).", file=sys.stderr)
             print(f"   Erreur: {e}", file=sys.stderr)
+            print(f"--> PLAN B: On va utiliser la capture d'écran du HTML à la place.")
+            # On crée un fichier marqueur pour que le script de post-traitement prenne le relais
+            with open(f"{OUTPUT_HTML_NAME}.needs_screenshot", "w") as f:
+                f.write("plotly")
     elif 'folium.folium.Map' in object_type:
         print(f"--> Détecté : Folium. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
         final_object.save(OUTPUT_HTML_NAME)
-        # On crée un fichier marqueur pour que le script de post-traitement sache qu'il s'agit de Folium
-        with open(f"{OUTPUT_HTML_NAME}.is_folium", "w") as f:
-            f.write("true")
+        # On crée un fichier marqueur générique pour la capture d'écran
+        print(f"--> Création du marqueur de capture d'écran.")
+        with open(f"{OUTPUT_HTML_NAME}.needs_screenshot", "w") as f:
+            f.write("folium")
     elif 'altair.vegalite' in object_type and hasattr(final_object, 'save'):
         print(f"--> Détecté : Altair. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
         final_object.save(OUTPUT_HTML_NAME)
+        # On crée un fichier marqueur générique pour la capture d'écran
+        print(f"--> Création du marqueur de capture d'écran.")
+        with open(f"{OUTPUT_HTML_NAME}.needs_screenshot", "w") as f:
+            f.write("altair")
     elif 'bokeh.plotting' in object_type and bokeh_save is not None:
         print(f"--> Détecté : Bokeh. Sauvegarde HTML dans : {OUTPUT_HTML_NAME}")
         bokeh_save(final_object, filename=OUTPUT_HTML_NAME, title="")
+        # On crée un fichier marqueur générique pour la capture d'écran
+        print(f"--> Création du marqueur de capture d'écran.")
+        with open(f"{OUTPUT_HTML_NAME}.needs_screenshot", "w") as f:
+            f.write("bokeh")
     elif 'matplotlib.figure.Figure' in object_type:
         print(f"--> Détecté : Matplotlib. Sauvegarde dans : {OUTPUT_IMAGE_NAME}")
         final_object.savefig(OUTPUT_IMAGE_NAME, dpi=300, bbox_inches='tight')
@@ -263,18 +276,25 @@ def process_notebook(notebook_path_str):
             check=True, capture_output=True, text=True, encoding='utf-8')
         print("Exécution terminée.")
 
-        # POST-TRAITEMENT : capture d'écran pour Folium uniquement
+        # POST-TRAITEMENT : capture d'écran pour les HTML qui le requièrent
         if dest_html_path.exists():
-            folium_marker_path = Path(f"{dest_html_path}.is_folium")
-            if folium_marker_path.exists():
-                print("--> Fichier HTML Folium détecté. Lancement de la capture d'écran.")
+            screenshot_marker_path = Path(f"{dest_html_path}.needs_screenshot")
+            if screenshot_marker_path.exists():
+                lib_name = "inconnu"
+                try:
+                    with open(screenshot_marker_path, 'r') as f:
+                        lib_name = f.read().strip()
+                except Exception:
+                    pass # On ignore les erreurs de lecture, on utilisera "inconnu"
+                
+                print(f"--> Fichier HTML ({lib_name}) nécessitant une capture détecté. Lancement du processus.")
                 center_html_content(str(dest_html_path))
                 capture_html_screenshot(str(dest_html_path), str(dest_png_path))
-                folium_marker_path.unlink() # Nettoyage du marqueur
+                screenshot_marker_path.unlink() # Nettoyage du marqueur
             else:
-                print(f"--> Fichier HTML {dest_html_path.name} trouvé, mais ce n'est pas une carte Folium. Capture d'écran sautée.")
+                print(f"--> Fichier HTML {dest_html_path.name} trouvé, mais ne nécessite pas de capture d'écran (ex: Plotly a réussi son export direct). Capture sautée.")
         else:
-            print("--> Aucun fichier HTML trouvé, pas de capture d'écran nécessaire.")
+            print("--> Aucun fichier HTML généré, pas de capture d'écran nécessaire.")
 
         # Si tout réussit, on déplace le notebook exécuté et on supprime l'original
         PUBLISHED_NOTEBOOK_FOLDER.mkdir(parents=True, exist_ok=True)

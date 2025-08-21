@@ -11,3 +11,5 @@ gradio
 altair
 bokeh
 playwright
+selenium
+webdriver-manager
